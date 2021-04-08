@@ -1,26 +1,23 @@
 import { iTokens } from '../config/iTokens'
-import { pTokens } from '../config/pTokens'
 import erc20Tokens from '../config/erc20Tokens'
 
 import BigNumber from 'bignumber.js'
 import {
   DappHelperJson,
-  mainnetAddress as dappHelperAddress
+  mainnetAddress as dappHelperAddress,
 } from '../contracts/DappHelperContract'
 import Web3Utils from 'web3-utils'
 import { mainnetAddress as oracleAddress, oracleJson } from '../contracts/OracleContract'
 import { erc20Json } from '../contracts/erc20Contract'
 import { iTokenJson } from '../contracts/iTokenContract'
-import { pTokenJson } from '../contracts/pTokenContract'
 import { mainnetAddress as iBZxAddress, iBZxJson } from '../contracts/iBZxContract'
 import {
   mainnetAddress as bzrxVestingTokenAddress,
-  bzrxVestingJson
+  bzrxVestingJson,
 } from '../contracts/BZRXVestingTokenContract'
 import { mainnetAddress as stakingV1Address, stakingV1Json } from '../contracts/StakingV1Contract'
 import { mainnetAddress as threePoolAddress, threePoolJson } from '../contracts/ThreePoolContract'
 import config from '../config.json'
-import { pTokenPricesModel, pTokenPriceModel } from '../models/pTokenPrices'
 import { iTokenPricesModel, iTokenPriceModel } from '../models/iTokenPrices'
 import { statsModel, tokenStatsModel, allTokensStatsModel } from '../models/stats'
 import { loanParamsListModel, loanParamsModel } from '../models/loanParams'
@@ -47,10 +44,6 @@ export default class Fulcrum {
     await this.updateITokensPrices()
     // await this.storage.setItem("itoken-prices", itoken);
     this.logger.info('itoken-prices updated')
-
-    await this.updatePTokensPrices()
-    // await this.storage.setItem("ptoken-prices", ptoken);
-    this.logger.info('ptoken-prices updated')
   }
 
   async updateParamsCache(key, value) {
@@ -112,7 +105,7 @@ export default class Fulcrum {
         lendRates.push({
           apr: lendApr,
           apy: lendApy,
-          tokenSymbol
+          tokenSymbol,
         })
       })
 
@@ -132,7 +125,7 @@ export default class Fulcrum {
         borrowRates.push({
           apr: borrowApr,
           apy: borrowApy,
-          tokenSymbol
+          tokenSymbol,
         })
       })
 
@@ -155,7 +148,7 @@ export default class Fulcrum {
           lendApy,
           borrowApr,
           borrowApy,
-          yieldFarmingAPR
+          yieldFarmingAPR,
         }
       })
     return rates
@@ -204,12 +197,7 @@ export default class Fulcrum {
 
   async getITokensPrices() {
     const lastITokenPrices = (
-      await iTokenPricesModel
-        .find()
-        .sort({ _id: -1 })
-        .select({ iTokenPrices: 1 })
-        .lean()
-        .limit(1)
+      await iTokenPricesModel.find().sort({ _id: -1 }).select({ iTokenPrices: 1 }).lean().limit(1)
     )[0]
     if (!lastITokenPrices) {
       this.logger.info('No itoken-prices in db!')
@@ -226,7 +214,7 @@ export default class Fulcrum {
         symbol: iTokenPrice.symbol,
         address: iTokenPrice.address,
         price_usd: iTokenPrice.priceUsd,
-        price_asset: iTokenPrice.priceAsset
+        price_asset: iTokenPrice.priceAsset,
       }
     })
     return result
@@ -252,83 +240,16 @@ export default class Fulcrum {
         symbol: iToken.iTokenName,
         address: iToken.address.toLowerCase(),
         priceUsd: priceUsd.toNumber(),
-        priceAsset: priceAsset.toNumber()
+        priceAsset: priceAsset.toNumber(),
       })
       iTokenPrices.iTokenPrices.push(iTokenPrice)
     }
     await iTokenPrices.save()
   }
 
-  async getPTokensPrices() {
-    const lastPTokenPrices = (
-      await pTokenPricesModel
-        .find()
-        .sort({ _id: -1 })
-        .select({ pTokenPrices: 1 })
-        .lean()
-        .limit(1)
-    )[0]
-    if (!lastPTokenPrices) {
-      this.logger.info('No ptoken-prices in db!')
-      await this.updatePTokensPrices()
-      // await this.storage.setItem("ptoken-prices", result);
-      // console.dir(`ptoken-prices:`);
-      // console.dir(result);
-    }
-    const result = {}
-    lastPTokenPrices.pTokenPrices.forEach((pTokenPrice) => {
-      result[pTokenPrice.token] = {
-        symbol: pTokenPrice.symbol,
-        address: pTokenPrice.address,
-        price_usd: pTokenPrice.priceUsd
-      }
-    })
-    return result
-  }
-
-  async updatePTokensPrices() {
-    const result = {}
-    const usdRates = await this.getUsdRates()
-    const pTokenPrices = new pTokenPricesModel()
-    pTokenPrices.pTokenPrices = []
-    try {
-      for (const token in pTokens) {
-        const pToken = pTokens[token]
-        const pTokenContract = new this.web3.eth.Contract(pTokenJson.abi, pToken.address)
-        this.logger.info('call pTokenContract')
-
-        const tokenPrice = await pTokenContract.methods
-          .tokenPrice()
-          .call({ from: '0x4abB24590606f5bf4645185e20C4E7B97596cA3B' })
-        // price is in loanAsset of iToken contract
-        const baseAsset = this.getBaseAsset(pToken)
-        // const swapPrice = await this.getSwapToUsdRate(baseAsset);
-        const price = new BigNumber(tokenPrice)
-          .multipliedBy(usdRates[baseAsset.toLowerCase()])
-          .dividedBy(10 ** 18)
-        const pTokenPrice = new pTokenPriceModel({
-          token: pToken.ticker.toLowerCase(),
-          symbol: pToken.ticker,
-          address: pToken.address,
-          priceUsd: price.toNumber()
-        })
-        pTokenPrices.pTokenPrices.push(pTokenPrice)
-      }
-      await pTokenPrices.save()
-    } catch (e) {
-      this.logger.error(e)
-    }
-    return result
-  }
-
   async getLoanParams() {
     const lastLoanParams = (
-      await loanParamsListModel
-        .find()
-        .sort({ _id: -1 })
-        .select({ loanParams: 1 })
-        .lean()
-        .limit(1)
+      await loanParamsListModel.find().sort({ _id: -1 }).select({ loanParams: 1 }).lean().limit(1)
     )[0]
     if (!lastLoanParams) {
       this.logger.info('No loan-params in db!')
@@ -343,7 +264,7 @@ export default class Fulcrum {
         platform: params.platform,
         initialMargin: params.initialMargin,
         maintenanceMargin: params.maintenanceMargin,
-        liquidationPenalty: params.liquidationPenalty
+        liquidationPenalty: params.liquidationPenalty,
       }
     })
   }
@@ -393,7 +314,7 @@ export default class Fulcrum {
                 platform: 'Fulcrum',
                 initialMargin: new BigNumber(fulcrumLoanParams[5]).div(10 ** 18),
                 maintenanceMargin: new BigNumber(fulcrumLoanParams[6]).div(10 ** 18),
-                liquidationPenalty: new BigNumber(liquidationIncentivePercent).div(10 ** 18)
+                liquidationPenalty: new BigNumber(liquidationIncentivePercent).div(10 ** 18),
               })
             )
         } catch (e) {
@@ -420,7 +341,7 @@ export default class Fulcrum {
                 platform: 'Torque',
                 initialMargin: new BigNumber(torqueLoanParams[5]).div(10 ** 18),
                 maintenanceMargin: new BigNumber(torqueLoanParams[6]).div(10 ** 18),
-                liquidationPenalty: new BigNumber(liquidationIncentivePercent).div(10 ** 18)
+                liquidationPenalty: new BigNumber(liquidationIncentivePercent).div(10 ** 18),
               })
             )
         } catch (e) {
@@ -434,10 +355,6 @@ export default class Fulcrum {
     }
 
     return result
-  }
-
-  getBaseAsset(pToken) {
-    return pToken.direction === 'SHORT' ? pToken.unit : pToken.asset
   }
 
   async getSwapToUsdRate(asset) {
@@ -540,8 +457,8 @@ export default class Fulcrum {
         {
           date: {
             $lt: endDate,
-            $gte: startDate
-          }
+            $gte: startDate,
+          },
         },
         { date: 1, allTokensStats: 1 }
       )
@@ -577,7 +494,7 @@ export default class Fulcrum {
       result.push({
         timestamp: new Date(document.date).getTime(),
         tvl: document.allTokensStats.usdTotalLocked,
-        diffWithPrevPrecents: diffWithPrevPrecents
+        diffWithPrevPrecents: diffWithPrevPrecents,
       })
     })
     return result
@@ -589,9 +506,9 @@ export default class Fulcrum {
         {
           date: {
             $lt: endDate,
-            $gte: startDate
+            $gte: startDate,
           },
-          tokensStats: { $elemMatch: { token: asset } }
+          tokensStats: { $elemMatch: { token: asset } },
         },
         { date: 1, tokensStats: 1, 'tokensStats.$': asset }
       )
@@ -644,7 +561,7 @@ export default class Fulcrum {
         utilization: utilization,
         tvlChange24h,
         aprChange24h,
-        utilizationChange24h
+        utilizationChange24h,
       })
     })
     return result
@@ -656,9 +573,9 @@ export default class Fulcrum {
         {
           date: {
             $lt: new Date(date.getTime() + 1000 * 60 * 60),
-            $gte: new Date(date.getTime() - 1000 * 60 * 60)
+            $gte: new Date(date.getTime() - 1000 * 60 * 60),
           },
-          tokensStats: { $elemMatch: { token: asset } }
+          tokensStats: { $elemMatch: { token: asset } },
         },
         { date: 1, tokensStats: 1, 'tokensStats.$': asset }
       )
@@ -667,7 +584,7 @@ export default class Fulcrum {
 
     return {
       swapToUSDPrice: dbStatsDocuments[0].tokensStats[0].swapToUSDPrice,
-      timestamp: dbStatsDocuments[0].date.getTime()
+      timestamp: dbStatsDocuments[0].date.getTime(),
     }
   }
 
@@ -871,7 +788,7 @@ export default class Fulcrum {
               swapToUSDPrice: new BigNumber(swapRates[i]).dividedBy(10 ** 18).toFixed(),
               usdSupply: usdSupply.dividedBy(10 ** 18).toFixed(),
               usdTotalLocked: usdTotalLocked.dividedBy(10 ** 18).toFixed(),
-              yieldFarmingAPR: new BigNumber(0)
+              yieldFarmingAPR: new BigNumber(0),
             })
           )
         })
@@ -900,10 +817,7 @@ export default class Fulcrum {
 
         const reward = rebate.plus(monthlyRewardPerToken)
         const yieldMonthlyRate = reward.div(totalBorrowUSD)
-        const yieldYearlyPercents = yieldMonthlyRate
-          .times(12)
-          .times(100)
-          .div(2)
+        const yieldYearlyPercents = yieldMonthlyRate.times(12).times(100).div(2)
 
         tokenStat.yieldFarmingAPR =
           isNaN(yieldYearlyPercents.toFixed()) || yieldYearlyPercents.toFixed() === 'Infinity'
@@ -914,7 +828,7 @@ export default class Fulcrum {
       stats.allTokensStats = new allTokensStatsModel({
         token: 'all',
         usdSupply: usdSupplyAll.dividedBy(10 ** 18).toFixed(),
-        usdTotalLocked: usdTotalLockedAll.dividedBy(10 ** 18).toFixed()
+        usdTotalLocked: usdTotalLockedAll.dividedBy(10 ** 18).toFixed(),
       })
       await stats.save()
     }

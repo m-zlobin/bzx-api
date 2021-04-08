@@ -15,7 +15,7 @@ export default ({ config, logger }) => {
 
   ;(async () => {
     await storage.init({
-      dir: 'persist-storage'
+      dir: 'persist-storage',
     })
   })()
   const web3 = new Web3(new Web3.providers.HttpProvider(config.web3_provider_url))
@@ -97,17 +97,13 @@ export default ({ config, logger }) => {
     const usdRates = await fulcrum.getITokensPrices()
     res.json({ data: usdRates, success: true })
   })
-  api.get('/ptoken-prices', async (req, res) => {
-    const usdRates = await fulcrum.getPTokensPrices()
-    res.json({ data: usdRates, success: true })
-  })
 
   api.get(
     '/tvl-history',
     [
       query('start_date').isInt({ gt: 0 }),
       query('end_date').isInt({ lte: new Date().setDate(new Date().getDate() + 1) }),
-      query('points_number').isInt({ gt: 0 })
+      query('points_number').isInt({ gt: 0 }),
     ],
     async (req, res) => {
       const errors = validationResult(req)
@@ -129,7 +125,7 @@ export default ({ config, logger }) => {
       query('asset').isIn(iTokens.map((token) => token.name)),
       query('start_date').isInt({ gt: 0 }),
       query('end_date').isInt({ lte: new Date().setDate(new Date().getDate() + 1) }),
-      query('points_number').isInt({ gt: 0 })
+      query('points_number').isInt({ gt: 0 }),
     ],
     async (req, res) => {
       const errors = validationResult(req)
@@ -150,7 +146,7 @@ export default ({ config, logger }) => {
     '/asset-history-price',
     [
       query('asset').isIn(iTokens.map((token) => token.name)),
-      query('date').isInt({ gt: 0, lte: new Date().setDate(new Date().getDate() + 1) })
+      query('date').isInt({ gt: 0, lte: new Date().setDate(new Date().getDate() + 1) }),
     ],
     async (req, res) => {
       const errors = validationResult(req)
@@ -170,7 +166,7 @@ export default ({ config, logger }) => {
     [
       query('borrow_asset').isIn(iTokens.map((token) => token.name)),
       query('borrow_asset').isIn(iTokens.map((token) => token.name)),
-      query('amount').isFloat({ gt: 0 })
+      query('amount').isFloat({ gt: 0 }),
     ],
     async (req, res) => {
       const errors = validationResult(req)
@@ -193,7 +189,7 @@ export default ({ config, logger }) => {
     }
   )
 
-  api.get('*', function(req, res) {
+  api.get('*', function (req, res) {
     res
       .status(404)
       .send("Endpoint not found. Go to <a href='https://api.bzx.network'>bZx API docs page</a>")
