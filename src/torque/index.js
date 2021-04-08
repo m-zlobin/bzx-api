@@ -4,10 +4,12 @@ import BigNumber from 'bignumber.js'
 import { iTokenJson } from '../contracts/iTokenContract'
 
 export default class Torque {
-  constructor(web3, storage, logger) {
+  constructor(web3, storage, logger, network) {
     this.web3 = web3
     this.storage = storage
     this.logger = logger
+    this.network = network
+    this.iTokensByNetwork = iTokens[network]
   }
 
   async getBorrowDepositEstimate(borrowAssetName, collateralAssetName, amount) {
@@ -19,8 +21,10 @@ export default class Torque {
     }
     console.log('no cache')
     const result = { depositAmount: new BigNumber(0), gasEstimate: new BigNumber(0) }
-    const borrowAsset = iTokens.find((token) => token.name === borrowAssetName)
-    const collateralAsset = iTokens.find((token) => token.name === collateralAssetName)
+    const borrowAsset = this.iTokensByNetwork.find((token) => token.name === borrowAssetName)
+    const collateralAsset = this.iTokensByNetwork.find(
+      (token) => token.name === collateralAssetName
+    )
 
     const iTokenContract = new this.web3.eth.Contract(iTokenJson.abi, borrowAsset.address)
     const collateralAssetErc20Address = collateralAsset.erc20Address

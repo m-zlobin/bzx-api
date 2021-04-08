@@ -4,5 +4,6 @@
   "corsHeaders": ["Link"],
   "cache_ttl_sec": 900,
   "cache_params_ttl_day": 1,
-  "web3_provider_url": "https://eth-mainnet.alchemyapi.io/v2/ifuo2lV1cQiJIHHwyvYzZPN8mSyFbqlS"
+  "web3_provider_url": "https://eth-mainnet.alchemyapi.io/v2/ifuo2lV1cQiJIHHwyvYzZPN8mSyFbqlS",
+  "web3_bsc_provider_url": "https://bsc-dataseed.binance.org/"
 }

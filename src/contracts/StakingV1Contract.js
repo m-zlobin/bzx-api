@@ -1,6 +1,8 @@
-export const mainnetAddress = '0xe95ebce2b02ee07def5ed6b53289801f7fc137a4'
-
-export const stakingV1Json = {
+const mainnetAddress = '0xe95ebce2b02ee07def5ed6b53289801f7fc137a4'
+const addresses = {
+  eth: mainnetAddress,
+}
+const stakingV1Json = {
   abi: [
     {
       anonymous: false,
@@ -9,23 +11,23 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'bzrxAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'stableCoinAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'AddRewards',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -34,23 +36,23 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'oldDelegate',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'newDelegate',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'ChangeDelegate',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -59,23 +61,23 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'bzrxAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'stableCoinAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Claim',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -84,23 +86,23 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'bzrxOutput',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'stableCoinOutput',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'ConvertFees',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -109,23 +111,23 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'bzrxRewards',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'stableCoinRewards',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'DistributeFees',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -134,17 +136,17 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'previousOwner',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'newOwner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'OwnershipTransferred',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -153,29 +155,29 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'token',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'delegate',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Stake',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -184,29 +186,29 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'token',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'delegate',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Unstake',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -215,11 +217,11 @@ export const stakingV1Json = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'WithdrawFees',
-      type: 'event'
+      type: 'event',
     },
     {
       constant: true,
@@ -229,12 +231,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -244,12 +246,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -259,12 +261,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -274,12 +276,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -289,12 +291,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -304,12 +306,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -319,12 +321,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -334,12 +336,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -347,35 +349,35 @@ export const stakingV1Json = {
         {
           internalType: 'address[]',
           name: 'accounts',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'uint256[]',
           name: 'bzrxAmounts',
-          type: 'uint256[]'
+          type: 'uint256[]',
         },
         {
           internalType: 'uint256[]',
           name: 'stableCoinAmounts',
-          type: 'uint256[]'
-        }
+          type: 'uint256[]',
+        },
       ],
       name: 'addDirectRewards',
       outputs: [
         {
           internalType: 'uint256',
           name: 'bzrxTotal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'stableCoinTotal',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -383,19 +385,19 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: 'newBZRX',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'newStableCoin',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'addRewards',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -405,12 +407,12 @@ export const stakingV1Json = {
         {
           internalType: 'contract IBZxPartial',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -418,25 +420,25 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: 'token',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'account',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'balanceOfByAsset',
       outputs: [
         {
           internalType: 'uint256',
           name: 'balance',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -444,35 +446,35 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: 'account',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'balanceOfByAssets',
       outputs: [
         {
           internalType: 'uint256',
           name: 'bzrxBalance',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'iBZRXBalance',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'vBZRXBalance',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'LPTokenBalance',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -480,25 +482,25 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: 'account',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'balanceOfStored',
       outputs: [
         {
           internalType: 'uint256',
           name: 'vestedBalance',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'vestingBalance',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -508,12 +510,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -521,20 +523,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'bzrxRewards',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -542,20 +544,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'bzrxRewardsPerTokenPaid',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -563,20 +565,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'bzrxVesting',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -586,12 +588,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -599,25 +601,25 @@ export const stakingV1Json = {
         {
           internalType: 'bool',
           name: 'restake',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'claim',
       outputs: [
         {
           internalType: 'uint256',
           name: 'bzrxRewardsEarned',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'stableCoinRewardsEarned',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -627,12 +629,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: 'stableCoinRewardsEarned',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -642,12 +644,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: 'bzrxRewardsEarned',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -657,12 +659,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -670,20 +672,20 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'currentFeeTokens',
       outputs: [
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -693,12 +695,12 @@ export const stakingV1Json = {
         {
           internalType: 'contract IERC20',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -708,12 +710,12 @@ export const stakingV1Json = {
         {
           internalType: 'contract ICurve3Pool',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -721,20 +723,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'delegate',
       outputs: [
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -742,20 +744,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: 'account',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'delegateBalanceOf',
       outputs: [
         {
           internalType: 'uint256',
           name: 'totalVotes',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -763,25 +765,25 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'delegatedPerToken',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -789,35 +791,35 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: 'account',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'earned',
       outputs: [
         {
           internalType: 'uint256',
           name: 'bzrxRewardsEarned',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'stableCoinRewardsEarned',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'bzrxRewardsVesting',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'stableCoinRewardsVesting',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -826,7 +828,7 @@ export const stakingV1Json = {
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -836,12 +838,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -851,22 +853,22 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: 'vBZRXWeight',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'iBZRXWeight',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'LPTokenWeight',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -876,12 +878,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -891,12 +893,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -906,12 +908,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -921,12 +923,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -936,12 +938,12 @@ export const stakingV1Json = {
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -951,12 +953,12 @@ export const stakingV1Json = {
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -966,12 +968,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -981,12 +983,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -996,12 +998,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1011,12 +1013,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1026,12 +1028,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1039,14 +1041,14 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '_callerRewardDivisor',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setCallerRewardDivisor',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1055,7 +1057,7 @@ export const stakingV1Json = {
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1063,14 +1065,14 @@ export const stakingV1Json = {
         {
           internalType: 'address[]',
           name: 'tokens',
-          type: 'address[]'
-        }
+          type: 'address[]',
+        },
       ],
       name: 'setFeeTokens',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1078,14 +1080,14 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '_fundsWallet',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'setFundsWallet',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1093,14 +1095,14 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '_maxCurveDisagreement',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setMaxCurveDisagreement',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1108,14 +1110,14 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '_maxUniswapDisagreement',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setMaxUniswapDisagreement',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1123,14 +1125,14 @@ export const stakingV1Json = {
         {
           internalType: 'address[][]',
           name: 'paths',
-          type: 'address[][]'
-        }
+          type: 'address[][]',
+        },
       ],
       name: 'setPaths',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1138,14 +1140,14 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '_rewardPercent',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setRewardPercent',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1155,12 +1157,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1168,20 +1170,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'stableCoinRewards',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1189,20 +1191,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'stableCoinRewardsPerTokenPaid',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1210,20 +1212,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'stableCoinVesting',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1231,19 +1233,19 @@ export const stakingV1Json = {
         {
           internalType: 'address[]',
           name: 'tokens',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'uint256[]',
           name: 'values',
-          type: 'uint256[]'
-        }
+          type: 'uint256[]',
+        },
       ],
       name: 'stake',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1251,20 +1253,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'stakingRewards',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1272,25 +1274,25 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'swapPaths',
       outputs: [
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1300,17 +1302,17 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: 'bzrxRewards',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'crv3Rewards',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1318,25 +1320,25 @@ export const stakingV1Json = {
         {
           internalType: 'address[]',
           name: 'assets',
-          type: 'address[]'
-        }
+          type: 'address[]',
+        },
       ],
       name: 'sweepFeesByAsset',
       outputs: [
         {
           internalType: 'uint256',
           name: 'bzrxRewards',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'crv3Rewards',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1344,14 +1346,14 @@ export const stakingV1Json = {
         {
           internalType: 'bool',
           name: '_isPaused',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'togglePause',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1359,20 +1361,20 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: 'token',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'totalSupplyByAsset',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1382,12 +1384,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: 'supply',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1395,14 +1397,14 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: 'newOwner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'transferOwnership',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1412,12 +1414,12 @@ export const stakingV1Json = {
         {
           internalType: 'contract IUniswapV2Router',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1425,19 +1427,19 @@ export const stakingV1Json = {
         {
           internalType: 'address[]',
           name: 'tokens',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'uint256[]',
           name: 'values',
-          type: 'uint256[]'
-        }
+          type: 'uint256[]',
+        },
       ],
       name: 'unstake',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1447,12 +1449,12 @@ export const stakingV1Json = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1462,12 +1464,12 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1475,30 +1477,30 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: 'tokenBalance',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'lastUpdate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'vestingEndTime',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'vestedBalanceForAmount',
       outputs: [
         {
           internalType: 'uint256',
           name: 'vested',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1508,12 +1510,21 @@ export const stakingV1Json = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
+    },
+  ],
+}
+export default {
+  getAddress: (network) => {
+    if (!addresses[network]) {
+      throw new Error('Contract address not found')
     }
-  ]
+    return addresses[network]
+  },
+  abi: stakingV1Json.abi,
 }

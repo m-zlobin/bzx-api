@@ -10,7 +10,10 @@ import QueuedStorage from '../QueuedStorage'
 
 export default ({ config, logger }) => {
   const api = Router()
-
+  const networks = ['eth', 'bsc']
+  const supportedTokensList = networks.flatMap((network) =>
+    iTokens[network].flatMap((token) => token.name)
+  )
   const storage = new QueuedStorage()
 
   ;(async () => {
@@ -19,9 +22,13 @@ export default ({ config, logger }) => {
     })
   })()
   const web3 = new Web3(new Web3.providers.HttpProvider(config.web3_provider_url))
+  const web3Bsc = new Web3(new Web3.providers.HttpProvider(config.web3_bsc_provider_url))
 
-  const fulcrum = new Fulcrum(web3, storage, logger)
-  const torque = new Torque(web3, storage, logger)
+  const fulcrum = new Fulcrum(web3, storage, logger, 'eth')
+  const fulcrumBsc = new Fulcrum(web3Bsc, storage, logger, 'bsc')
+
+  const torque = new Torque(web3, storage, logger, 'eth')
+  const torqueBsc = new Torque(web3Bsc, storage, logger, 'bsc')
 
   api.get('/interest-rates-fulcrum', async (req, res) => {
     const lendRates = await fulcrum.getFulcrumLendRates()
@@ -88,6 +95,11 @@ export default ({ config, logger }) => {
     res.json({ data: tvl, success: true })
   })
 
+  api.get('/bsc/vault-balance-usd', async (req, res) => {
+    const tvl = await fulcrumBsc.getTVL()
+    res.json({ data: tvl, success: true })
+  })
+
   api.get('/oracle-rates-usd', async (req, res) => {
     const usdRates = await fulcrum.getUsdRates()
     res.json({ data: usdRates, success: true })
@@ -122,7 +134,7 @@ export default ({ config, logger }) => {
   api.get(
     '/asset-stats-history',
     [
-      query('asset').isIn(iTokens.map((token) => token.name)),
+      query('asset').isIn(supportedTokensList),
       query('start_date').isInt({ gt: 0 }),
       query('end_date').isInt({ lte: new Date().setDate(new Date().getDate() + 1) }),
       query('points_number').isInt({ gt: 0 }),
@@ -145,7 +157,7 @@ export default ({ config, logger }) => {
   api.get(
     '/asset-history-price',
     [
-      query('asset').isIn(iTokens.map((token) => token.name)),
+      query('asset').isIn(supportedTokensList),
       query('date').isInt({ gt: 0, lte: new Date().setDate(new Date().getDate() + 1) }),
     ],
     async (req, res) => {
@@ -164,8 +176,8 @@ export default ({ config, logger }) => {
   api.get(
     '/borrow-deposit-estimate',
     [
-      query('borrow_asset').isIn(iTokens.map((token) => token.name)),
-      query('borrow_asset').isIn(iTokens.map((token) => token.name)),
+      query('borrow_asset').isIn(supportedTokensList),
+      query('borrow_asset').isIn(supportedTokensList),
       query('amount').isFloat({ gt: 0 }),
     ],
     async (req, res) => {

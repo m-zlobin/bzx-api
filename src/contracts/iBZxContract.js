@@ -1,6 +1,9 @@
-export const mainnetAddress = '0xD8Ee69652E4e4838f2531732a46d1f7F584F0b7f'
-
-export const iBZxJson = {
+const mainnetAddress = '0xD8Ee69652E4e4838f2531732a46d1f7F584F0b7f'
+const addresses = {
+  eth: mainnetAddress,
+  bsc: '0xc47812857a74425e2039b57891a3dfcf51602d5d',
+}
+const iBZxJson = {
   contractName: 'IBZx',
   abi: [
     {
@@ -10,71 +13,71 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newPrincipal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newCollateral',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'interestRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'interestDuration',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'collateralToLoanRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'currentMargin',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Borrow',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -83,29 +86,29 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'token',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'ClaimReward',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -114,65 +117,65 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'closer',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'repayAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'collateralWithdrawAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'collateralToLoanRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'currentMargin',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'CloseWithDeposit',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -181,65 +184,65 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'closer',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'positionCloseSize',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'loanCloseAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'exitPrice',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'currentLeverage',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'CloseWithSwap',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -248,29 +251,29 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'delegator',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'delegated',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'bool',
           name: 'isActive',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'DelegatedManagerSet',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -279,29 +282,29 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'depositToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'depositAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'DepositCollateral',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -310,41 +313,41 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'depositToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'depositAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'collateralUsedAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newEndTimestamp',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'ExtendLoanDuration',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -353,35 +356,35 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'sourceToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'destToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'sourceAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'destAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'ExternalSwap',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -390,65 +393,65 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'liquidator',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'repayAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'collateralWithdrawAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'collateralToLoanRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'currentMargin',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Liquidate',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -457,17 +460,17 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'LoanInput',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -476,47 +479,47 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'bytes32',
           name: 'id',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'owner',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'minInitialMargin',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'maintenanceMargin',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'maxLoanTerm',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'LoanParamsDisabled',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -525,17 +528,17 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'bytes32',
           name: 'id',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'owner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'LoanParamsIdDisabled',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -544,17 +547,17 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'bytes32',
           name: 'id',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'owner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'LoanParamsIdSetup',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -563,47 +566,47 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'bytes32',
           name: 'id',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'owner',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'minInitialMargin',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'maintenanceMargin',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'maxLoanTerm',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'LoanParamsSetup',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -612,41 +615,41 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'sourceToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'destToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'borrower',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'sourceAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'destAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'LoanSwap',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -655,17 +658,17 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'previousOwner',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'newOwner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'OwnershipTransferred',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -674,35 +677,35 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'withdrawToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newEndTimestamp',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'ReduceLoanDuration',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -711,65 +714,65 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'caller',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'collateralAmountUsed',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'interestAmountAdded',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'loanEndTimestamp',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'gasRebate',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Rollover',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -778,23 +781,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'oldValue',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'SetAffiliateFeePercent',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -803,23 +806,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'oldValue',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'SetBorrowingFeePercent',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -828,23 +831,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'oldController',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'newController',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'SetFeesController',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -853,23 +856,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'oldValue',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'SetLendingFeePercent',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -878,35 +881,35 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'oldValue',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'SetLiquidationIncentivePercent',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -915,23 +918,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'loanPool',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'underlying',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'SetLoanPool',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -940,23 +943,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'oldValue',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'SetMaxSwapSize',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -965,23 +968,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'oldValue',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'newValue',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'SetPriceFeedContract',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -990,23 +993,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'token',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'bool',
           name: 'isActive',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'SetSupportedTokens',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -1015,23 +1018,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'oldValue',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'newValue',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'SetSwapsImplContract',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -1040,23 +1043,23 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'oldValue',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'SetTradingFeePercent',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -1065,77 +1068,77 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'positionSize',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'borrowedAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'interestRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'settlementDate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'entryPrice',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'entryLeverage',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'currentLeverage',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Trade',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -1144,29 +1147,29 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'token',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'WithdrawBorrowingFees',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -1175,29 +1178,29 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'withdrawToken',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'WithdrawCollateral',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -1206,29 +1209,29 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'token',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'WithdrawLendingFees',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -1237,29 +1240,29 @@ export const iBZxJson = {
           indexed: true,
           internalType: 'address',
           name: 'sender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'token',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'WithdrawTradingFees',
-      type: 'event'
+      type: 'event',
     },
     {
       constant: true,
@@ -1269,12 +1272,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1282,38 +1285,38 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanParamsId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'bool',
           name: 'isTorqueLoan',
-          type: 'bool'
+          type: 'bool',
         },
         {
           internalType: 'uint256',
           name: 'initialMargin',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'address[4]',
           name: 'sentAddresses',
-          type: 'address[4]'
+          type: 'address[4]',
         },
         {
           internalType: 'uint256[5]',
           name: 'sentValues',
-          type: 'uint256[5]'
+          type: 'uint256[5]',
         },
         {
           internalType: 'bytes',
           name: 'loanDataBytes',
-          type: 'bytes'
-        }
+          type: 'bytes',
+        },
       ],
       name: 'borrowOrTradeFromPool',
       outputs: [
@@ -1322,27 +1325,27 @@ export const iBZxJson = {
             {
               internalType: 'bytes32',
               name: 'loanId',
-              type: 'bytes32'
+              type: 'bytes32',
             },
             {
               internalType: 'uint256',
               name: 'principal',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'collateral',
-              type: 'uint256'
-            }
+              type: 'uint256',
+            },
           ],
           internalType: 'struct LoanOpeningsEvents.LoanOpenData',
           name: '',
-          type: 'tuple'
-        }
+          type: 'tuple',
+        },
       ],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1350,50 +1353,50 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'bytes32',
           name: '',
-          type: 'bytes32'
-        }
+          type: 'bytes32',
+        },
       ],
       name: 'borrowerOrders',
       outputs: [
         {
           internalType: 'uint256',
           name: 'lockedAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'minLoanTerm',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'maxLoanTerm',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'createdTimestamp',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'expirationTimestamp',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1403,12 +1406,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1416,20 +1419,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'borrowingFeeTokensHeld',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1437,20 +1440,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'borrowingFeeTokensPaid',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1460,12 +1463,12 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1473,20 +1476,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'claimRewards',
       outputs: [
         {
           internalType: 'uint256',
           name: 'claimAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1494,40 +1497,40 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'depositAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'closeWithDeposit',
       outputs: [
         {
           internalType: 'uint256',
           name: 'loanCloseAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'address',
           name: 'withdrawToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1535,45 +1538,45 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'gasTokenUser',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'depositAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'closeWithDepositWithGasToken',
       outputs: [
         {
           internalType: 'uint256',
           name: 'loanCloseAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'address',
           name: 'withdrawToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1581,50 +1584,50 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'swapAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'bool',
           name: 'returnTokenIsCollateral',
-          type: 'bool'
+          type: 'bool',
         },
         {
           internalType: 'bytes',
           name: 'loanDataBytes',
-          type: 'bytes'
-        }
+          type: 'bytes',
+        },
       ],
       name: 'closeWithSwap',
       outputs: [
         {
           internalType: 'uint256',
           name: 'loanCloseAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'address',
           name: 'withdrawToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1632,55 +1635,55 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'gasTokenUser',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'swapAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'bool',
           name: 'returnTokenIsCollateral',
-          type: 'bool'
+          type: 'bool',
         },
         {
           internalType: 'bytes',
           name: '',
-          type: 'bytes'
-        }
+          type: 'bytes',
+        },
       ],
       name: 'closeWithSwapWithGasToken',
       outputs: [
         {
           internalType: 'uint256',
           name: 'loanCloseAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'address',
           name: 'withdrawToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1688,25 +1691,25 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: '',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'delegatedManagers',
       outputs: [
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1714,19 +1717,19 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'uint256',
           name: 'depositAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'depositCollateral',
       outputs: [],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1734,14 +1737,14 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'depositProtocolToken',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1749,14 +1752,14 @@ export const iBZxJson = {
         {
           internalType: 'bytes32[]',
           name: 'loanParamsIdList',
-          type: 'bytes32[]'
-        }
+          type: 'bytes32[]',
+        },
       ],
       name: 'disableLoanParams',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -1764,35 +1767,35 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'uint256',
           name: 'depositAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'bool',
           name: 'useCollateral',
-          type: 'bool'
+          type: 'bool',
         },
         {
           internalType: 'bytes',
           name: '',
-          type: 'bytes'
-        }
+          type: 'bytes',
+        },
       ],
       name: 'extendLoanDuration',
       outputs: [
         {
           internalType: 'uint256',
           name: 'secondsExtended',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1802,12 +1805,12 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1815,18 +1818,18 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'start',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'count',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'bool',
           name: 'unsafeOnly',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'getActiveLoans',
       outputs: [
@@ -1835,97 +1838,97 @@ export const iBZxJson = {
             {
               internalType: 'bytes32',
               name: 'loanId',
-              type: 'bytes32'
+              type: 'bytes32',
             },
             {
               internalType: 'uint96',
               name: 'endTimestamp',
-              type: 'uint96'
+              type: 'uint96',
             },
             {
               internalType: 'address',
               name: 'loanToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'address',
               name: 'collateralToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'uint256',
               name: 'principal',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'collateral',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'interestOwedPerDay',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'interestDepositRemaining',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'startRate',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'startMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maintenanceMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'currentMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxLoanTerm',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxLiquidatable',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxSeizable',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'depositValueAsLoanToken',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'depositValueAsCollateralToken',
-              type: 'uint256'
-            }
+              type: 'uint256',
+            },
           ],
           internalType: 'struct LoanMaintenanceEvents.LoanReturnData[]',
           name: 'loansData',
-          type: 'tuple[]'
-        }
+          type: 'tuple[]',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1935,12 +1938,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1948,40 +1951,40 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'collateralTokenAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'marginAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'bool',
           name: 'isTorqueLoan',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'getBorrowAmount',
       outputs: [
         {
           internalType: 'uint256',
           name: 'borrowAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -1989,25 +1992,25 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanParamsId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'uint256',
           name: 'collateralTokenAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'getBorrowAmountByParams',
       outputs: [
         {
           internalType: 'uint256',
           name: 'borrowAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2015,45 +2018,45 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'loanTokenSent',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'collateralTokenSent',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'newPrincipal',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'getEstimatedMarginExposure',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2061,50 +2064,50 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'getLenderInterestData',
       outputs: [
         {
           internalType: 'uint256',
           name: 'interestPaid',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestPaidDate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestOwedPerDay',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestUnPaid',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestFeePercent',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'principalTotal',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2112,8 +2115,8 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
-        }
+          type: 'bytes32',
+        },
       ],
       name: 'getLoan',
       outputs: [
@@ -2122,97 +2125,97 @@ export const iBZxJson = {
             {
               internalType: 'bytes32',
               name: 'loanId',
-              type: 'bytes32'
+              type: 'bytes32',
             },
             {
               internalType: 'uint96',
               name: 'endTimestamp',
-              type: 'uint96'
+              type: 'uint96',
             },
             {
               internalType: 'address',
               name: 'loanToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'address',
               name: 'collateralToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'uint256',
               name: 'principal',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'collateral',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'interestOwedPerDay',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'interestDepositRemaining',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'startRate',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'startMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maintenanceMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'currentMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxLoanTerm',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxLiquidatable',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxSeizable',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'depositValueAsLoanToken',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'depositValueAsCollateralToken',
-              type: 'uint256'
-            }
+              type: 'uint256',
+            },
           ],
           internalType: 'struct LoanMaintenanceEvents.LoanReturnData',
           name: 'loanData',
-          type: 'tuple'
-        }
+          type: 'tuple',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2220,35 +2223,35 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
-        }
+          type: 'bytes32',
+        },
       ],
       name: 'getLoanInterestData',
       outputs: [
         {
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'interestOwedPerDay',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestDepositTotal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestDepositRemaining',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2256,8 +2259,8 @@ export const iBZxJson = {
         {
           internalType: 'bytes32[]',
           name: 'loanParamsIdList',
-          type: 'bytes32[]'
-        }
+          type: 'bytes32[]',
+        },
       ],
       name: 'getLoanParams',
       outputs: [
@@ -2266,52 +2269,52 @@ export const iBZxJson = {
             {
               internalType: 'bytes32',
               name: 'id',
-              type: 'bytes32'
+              type: 'bytes32',
             },
             {
               internalType: 'bool',
               name: 'active',
-              type: 'bool'
+              type: 'bool',
             },
             {
               internalType: 'address',
               name: 'owner',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'address',
               name: 'loanToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'address',
               name: 'collateralToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'uint256',
               name: 'minInitialMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maintenanceMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxLoanTerm',
-              type: 'uint256'
-            }
+              type: 'uint256',
+            },
           ],
           internalType: 'struct LoanParamsStruct.LoanParams[]',
           name: 'loanParamsList',
-          type: 'tuple[]'
-        }
+          type: 'tuple[]',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2319,30 +2322,30 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'owner',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'start',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'count',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'getLoanParamsList',
       outputs: [
         {
           internalType: 'bytes32[]',
           name: 'loanParamsList',
-          type: 'bytes32[]'
-        }
+          type: 'bytes32[]',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2350,25 +2353,25 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'start',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'count',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'getLoanPoolsList',
       outputs: [
         {
           internalType: 'address[]',
           name: 'loanPoolsList',
-          type: 'address[]'
-        }
+          type: 'address[]',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2376,40 +2379,40 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'newPrincipal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'marginAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'bool',
           name: 'isTorqueLoan',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'getRequiredCollateral',
       outputs: [
         {
           internalType: 'uint256',
           name: 'collateralAmountRequired',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2417,25 +2420,25 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanParamsId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'uint256',
           name: 'newPrincipal',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'getRequiredCollateralByParams',
       outputs: [
         {
           internalType: 'uint256',
           name: 'collateralAmountRequired',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2443,30 +2446,30 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'sourceToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'destToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'sourceTokenAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'getSwapExpectedReturn',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2474,20 +2477,20 @@ export const iBZxJson = {
         {
           internalType: 'string',
           name: 'sig',
-          type: 'string'
-        }
+          type: 'string',
+        },
       ],
       name: 'getTarget',
       outputs: [
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2495,25 +2498,25 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'getTotalPrincipal',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2521,33 +2524,33 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'start',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'count',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'enum LoanMaintenanceEvents.LoanType',
           name: 'loanType',
-          type: 'uint8'
+          type: 'uint8',
         },
         {
           internalType: 'bool',
           name: 'isLender',
-          type: 'bool'
+          type: 'bool',
         },
         {
           internalType: 'bool',
           name: 'unsafeOnly',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'getUserLoans',
       outputs: [
@@ -2556,97 +2559,97 @@ export const iBZxJson = {
             {
               internalType: 'bytes32',
               name: 'loanId',
-              type: 'bytes32'
+              type: 'bytes32',
             },
             {
               internalType: 'uint96',
               name: 'endTimestamp',
-              type: 'uint96'
+              type: 'uint96',
             },
             {
               internalType: 'address',
               name: 'loanToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'address',
               name: 'collateralToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'uint256',
               name: 'principal',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'collateral',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'interestOwedPerDay',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'interestDepositRemaining',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'startRate',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'startMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maintenanceMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'currentMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxLoanTerm',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxLiquidatable',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxSeizable',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'depositValueAsLoanToken',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'depositValueAsCollateralToken',
-              type: 'uint256'
-            }
+              type: 'uint256',
+            },
           ],
           internalType: 'struct LoanMaintenanceEvents.LoanReturnData[]',
           name: 'loansData',
-          type: 'tuple[]'
-        }
+          type: 'tuple[]',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2654,25 +2657,25 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'user',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'bool',
           name: 'isLender',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'getUserLoansCount',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -2680,25 +2683,25 @@ export const iBZxJson = {
         {
           internalType: 'address[]',
           name: 'users',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'uint256[]',
           name: 'amounts',
-          type: 'uint256[]'
-        }
+          type: 'uint256[]',
+        },
       ],
       name: 'grantRewards',
       outputs: [
         {
           internalType: 'uint256',
           name: 'totalAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2706,20 +2709,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'loanPool',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'isLoanPool',
       outputs: [
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2729,12 +2732,12 @@ export const iBZxJson = {
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2742,45 +2745,45 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'lenderInterest',
       outputs: [
         {
           internalType: 'uint256',
           name: 'principalTotal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'owedPerDay',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'owedTotal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'paidTotal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'updatedTimestamp',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2788,50 +2791,50 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'bytes32',
           name: '',
-          type: 'bytes32'
-        }
+          type: 'bytes32',
+        },
       ],
       name: 'lenderOrders',
       outputs: [
         {
           internalType: 'uint256',
           name: 'lockedAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'interestRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'minLoanTerm',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'maxLoanTerm',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'createdTimestamp',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'expirationTimestamp',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2841,12 +2844,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2854,20 +2857,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'lendingFeeTokensHeld',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2875,20 +2878,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'lendingFeeTokensPaid',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -2896,40 +2899,40 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'closeAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'liquidate',
       outputs: [
         {
           internalType: 'uint256',
           name: 'loanCloseAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'seizedAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'address',
           name: 'seizedToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -2937,45 +2940,45 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'gasTokenUser',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'closeAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'liquidateWithGasToken',
       outputs: [
         {
           internalType: 'uint256',
           name: 'loanCloseAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'seizedAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'address',
           name: 'seizedToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -2983,25 +2986,25 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'liquidationIncentivePercent',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3009,30 +3012,30 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: '',
-          type: 'bytes32'
-        }
+          type: 'bytes32',
+        },
       ],
       name: 'loanInterest',
       outputs: [
         {
           internalType: 'uint256',
           name: 'owedPerDay',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'depositTotal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'updatedTimestamp',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3040,55 +3043,55 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: '',
-          type: 'bytes32'
-        }
+          type: 'bytes32',
+        },
       ],
       name: 'loanParams',
       outputs: [
         {
           internalType: 'bytes32',
           name: 'id',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'bool',
           name: 'active',
-          type: 'bool'
+          type: 'bool',
         },
         {
           internalType: 'address',
           name: 'owner',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'collateralToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'minInitialMargin',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'maintenanceMargin',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'maxLoanTerm',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3096,20 +3099,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'loanPoolToUnderlying',
       outputs: [
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3117,75 +3120,75 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: '',
-          type: 'bytes32'
-        }
+          type: 'bytes32',
+        },
       ],
       name: 'loans',
       outputs: [
         {
           internalType: 'bytes32',
           name: 'id',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'bytes32',
           name: 'loanParamsId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'bytes32',
           name: 'pendingTradesId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'uint256',
           name: 'principal',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'collateral',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'startTimestamp',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'endTimestamp',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'startMargin',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'startRate',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'address',
           name: 'borrower',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'lender',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'bool',
           name: 'active',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3193,20 +3196,20 @@ export const iBZxJson = {
         {
           internalType: 'bytes4',
           name: '',
-          type: 'bytes4'
-        }
+          type: 'bytes4',
+        },
       ],
       name: 'logicTargets',
       outputs: [
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3216,12 +3219,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3231,12 +3234,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3246,12 +3249,12 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3261,12 +3264,12 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3276,12 +3279,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3291,12 +3294,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3304,30 +3307,30 @@ export const iBZxJson = {
         {
           internalType: 'address[]',
           name: 'tokens',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'enum ProtocolSettingsEvents.FeeClaimType',
           name: 'feeType',
-          type: 'uint8'
-        }
+          type: 'uint8',
+        },
       ],
       name: 'queryFees',
       outputs: [
         {
           internalType: 'uint256[]',
           name: 'amountsHeld',
-          type: 'uint256[]'
+          type: 'uint256[]',
         },
         {
           internalType: 'uint256[]',
           name: 'amountsPaid',
-          type: 'uint256[]'
-        }
+          type: 'uint256[]',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3335,30 +3338,30 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'reduceLoanDuration',
       outputs: [
         {
           internalType: 'uint256',
           name: 'secondsReduced',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3366,14 +3369,14 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'target',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'replaceContract',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3381,20 +3384,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'user',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'rewardsBalanceOf',
       outputs: [
         {
           internalType: 'uint256',
           name: 'rewardsBalance',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3402,30 +3405,30 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'bytes',
           name: 'loanDataBytes',
-          type: 'bytes'
-        }
+          type: 'bytes',
+        },
       ],
       name: 'rollover',
       outputs: [
         {
           internalType: 'address',
           name: 'rebateToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'gasRebate',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3433,35 +3436,35 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'gasTokenUser',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'bytes',
           name: '',
-          type: 'bytes'
-        }
+          type: 'bytes',
+        },
       ],
       name: 'rolloverWithGasToken',
       outputs: [
         {
           internalType: 'address',
           name: 'rebateToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'gasRebate',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3469,14 +3472,14 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setAffiliateFeePercent',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3484,14 +3487,14 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setBorrowingFeePercent',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3499,24 +3502,24 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'delegated',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'bool',
           name: 'toggle',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       name: 'setDelegatedManager',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3524,14 +3527,14 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'newController',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'setFeesController',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3539,14 +3542,14 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setLendingFeePercent',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3554,24 +3557,24 @@ export const iBZxJson = {
         {
           internalType: 'address[]',
           name: 'loanTokens',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'address[]',
           name: 'collateralTokens',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'uint256[]',
           name: 'amounts',
-          type: 'uint256[]'
-        }
+          type: 'uint256[]',
+        },
       ],
       name: 'setLiquidationIncentivePercent',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3579,19 +3582,19 @@ export const iBZxJson = {
         {
           internalType: 'address[]',
           name: 'pools',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'address[]',
           name: 'assets',
-          type: 'address[]'
-        }
+          type: 'address[]',
+        },
       ],
       name: 'setLoanPool',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3599,14 +3602,14 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'newAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setMaxDisagreement',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3614,14 +3617,14 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'newAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setMaxSwapSize',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3629,14 +3632,14 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'newContract',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'setPriceFeedContract',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3644,14 +3647,14 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'newAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setSourceBufferPercent',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3659,19 +3662,19 @@ export const iBZxJson = {
         {
           internalType: 'address[]',
           name: 'addrs',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'bool[]',
           name: 'toggles',
-          type: 'bool[]'
-        }
+          type: 'bool[]',
+        },
       ],
       name: 'setSupportedTokens',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3679,14 +3682,14 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'newContract',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'setSwapsImplContract',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3694,19 +3697,19 @@ export const iBZxJson = {
         {
           internalType: 'string[]',
           name: 'sigsArr',
-          type: 'string[]'
+          type: 'string[]',
         },
         {
           internalType: 'address[]',
           name: 'targetsArr',
-          type: 'address[]'
-        }
+          type: 'address[]',
+        },
       ],
       name: 'setTargets',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3714,14 +3717,14 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: 'newValue',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'setTradingFeePercent',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3731,60 +3734,60 @@ export const iBZxJson = {
             {
               internalType: 'bytes32',
               name: 'id',
-              type: 'bytes32'
+              type: 'bytes32',
             },
             {
               internalType: 'bool',
               name: 'active',
-              type: 'bool'
+              type: 'bool',
             },
             {
               internalType: 'address',
               name: 'owner',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'address',
               name: 'loanToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'address',
               name: 'collateralToken',
-              type: 'address'
+              type: 'address',
             },
             {
               internalType: 'uint256',
               name: 'minInitialMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maintenanceMargin',
-              type: 'uint256'
+              type: 'uint256',
             },
             {
               internalType: 'uint256',
               name: 'maxLoanTerm',
-              type: 'uint256'
-            }
+              type: 'uint256',
+            },
           ],
           internalType: 'struct LoanParamsStruct.LoanParams[]',
           name: 'loanParamsList',
-          type: 'tuple[]'
-        }
+          type: 'tuple[]',
+        },
       ],
       name: 'setupLoanParams',
       outputs: [
         {
           internalType: 'bytes32[]',
           name: 'loanParamsIdList',
-          type: 'bytes32[]'
-        }
+          type: 'bytes32[]',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3794,12 +3797,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3807,20 +3810,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'supportedTokens',
       outputs: [
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3828,55 +3831,55 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'sourceToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'destToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'returnToSender',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'sourceTokenAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'requiredDestTokenAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'bytes',
           name: 'swapData',
-          type: 'bytes'
-        }
+          type: 'bytes',
+        },
       ],
       name: 'swapExternal',
       outputs: [
         {
           internalType: 'uint256',
           name: 'destTokenAmountReceived',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'sourceTokenAmountUsed',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -3884,60 +3887,60 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'sourceToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'destToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'returnToSender',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: 'gasTokenUser',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'sourceTokenAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'requiredDestTokenAmount',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'bytes',
           name: 'swapData',
-          type: 'bytes'
-        }
+          type: 'bytes',
+        },
       ],
       name: 'swapExternalWithGasToken',
       outputs: [
         {
           internalType: 'uint256',
           name: 'destTokenAmountReceived',
-          type: 'uint256'
+          type: 'uint256',
         },
         {
           internalType: 'uint256',
           name: 'sourceTokenAmountUsed',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: true,
       stateMutability: 'payable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3947,12 +3950,12 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3962,12 +3965,12 @@ export const iBZxJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3975,20 +3978,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'tradingFeeTokensHeld',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -3996,20 +3999,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'tradingFeeTokensPaid',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -4017,14 +4020,14 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'newOwner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'transferOwnership',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -4032,20 +4035,20 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'underlyingToLoanPool',
       outputs: [
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -4055,12 +4058,12 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -4070,12 +4073,12 @@ export const iBZxJson = {
         {
           internalType: 'contract IWethERC20',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -4083,14 +4086,14 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'loanToken',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'withdrawAccruedInterest',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -4098,30 +4101,30 @@ export const iBZxJson = {
         {
           internalType: 'bytes32',
           name: 'loanId',
-          type: 'bytes32'
+          type: 'bytes32',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'withdrawCollateral',
       outputs: [
         {
           internalType: 'uint256',
           name: 'actualWithdrawAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -4129,30 +4132,30 @@ export const iBZxJson = {
         {
           internalType: 'address[]',
           name: 'tokens',
-          type: 'address[]'
+          type: 'address[]',
         },
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'enum ProtocolSettingsEvents.FeeClaimType',
           name: 'feeType',
-          type: 'uint8'
-        }
+          type: 'uint8',
+        },
       ],
       name: 'withdrawFees',
       outputs: [
         {
           internalType: 'uint256[]',
           name: 'amounts',
-          type: 'uint256[]'
-        }
+          type: 'uint256[]',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -4160,30 +4163,39 @@ export const iBZxJson = {
         {
           internalType: 'address',
           name: 'receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'withdrawProtocolToken',
       outputs: [
         {
           internalType: 'address',
           name: 'rewardToken',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: 'withdrawAmount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
+    },
+  ],
+}
+export default {
+  getAddress: (network) => {
+    if (!addresses[network]) {
+      throw new Error('Contract address not found')
     }
-  ]
+    return addresses[network]
+  },
+  abi: iBZxJson.abi,
 }

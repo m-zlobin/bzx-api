@@ -1,6 +1,8 @@
-export const mainnetAddress = '0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7'
-
-export const threePoolJson = {
+const mainnetAddress = '0xbEbc44782C7dB0a1A60Cb6fe97d0b483032FF1C7'
+const addresses = {
+  eth: mainnetAddress,
+}
+const threePoolJson = {
   name: 'threePool',
   abi: [
     {
@@ -10,10 +12,10 @@ export const threePoolJson = {
         { type: 'int128', name: 'sold_id', indexed: false },
         { type: 'uint256', name: 'tokens_sold', indexed: false },
         { type: 'int128', name: 'bought_id', indexed: false },
-        { type: 'uint256', name: 'tokens_bought', indexed: false }
+        { type: 'uint256', name: 'tokens_bought', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'AddLiquidity',
@@ -22,10 +24,10 @@ export const threePoolJson = {
         { type: 'uint256[3]', name: 'token_amounts', indexed: false },
         { type: 'uint256[3]', name: 'fees', indexed: false },
         { type: 'uint256', name: 'invariant', indexed: false },
-        { type: 'uint256', name: 'token_supply', indexed: false }
+        { type: 'uint256', name: 'token_supply', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'RemoveLiquidity',
@@ -33,20 +35,20 @@ export const threePoolJson = {
         { type: 'address', name: 'provider', indexed: true },
         { type: 'uint256[3]', name: 'token_amounts', indexed: false },
         { type: 'uint256[3]', name: 'fees', indexed: false },
-        { type: 'uint256', name: 'token_supply', indexed: false }
+        { type: 'uint256', name: 'token_supply', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'RemoveLiquidityOne',
       inputs: [
         { type: 'address', name: 'provider', indexed: true },
         { type: 'uint256', name: 'token_amount', indexed: false },
-        { type: 'uint256', name: 'coin_amount', indexed: false }
+        { type: 'uint256', name: 'coin_amount', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'RemoveLiquidityImbalance',
@@ -55,44 +57,44 @@ export const threePoolJson = {
         { type: 'uint256[3]', name: 'token_amounts', indexed: false },
         { type: 'uint256[3]', name: 'fees', indexed: false },
         { type: 'uint256', name: 'invariant', indexed: false },
-        { type: 'uint256', name: 'token_supply', indexed: false }
+        { type: 'uint256', name: 'token_supply', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'CommitNewAdmin',
       inputs: [
         { type: 'uint256', name: 'deadline', indexed: true },
-        { type: 'address', name: 'admin', indexed: true }
+        { type: 'address', name: 'admin', indexed: true },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'NewAdmin',
       inputs: [{ type: 'address', name: 'admin', indexed: true }],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'CommitNewFee',
       inputs: [
         { type: 'uint256', name: 'deadline', indexed: true },
         { type: 'uint256', name: 'fee', indexed: false },
-        { type: 'uint256', name: 'admin_fee', indexed: false }
+        { type: 'uint256', name: 'admin_fee', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'NewFee',
       inputs: [
         { type: 'uint256', name: 'fee', indexed: false },
-        { type: 'uint256', name: 'admin_fee', indexed: false }
+        { type: 'uint256', name: 'admin_fee', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'RampA',
@@ -100,19 +102,19 @@ export const threePoolJson = {
         { type: 'uint256', name: 'old_A', indexed: false },
         { type: 'uint256', name: 'new_A', indexed: false },
         { type: 'uint256', name: 'initial_time', indexed: false },
-        { type: 'uint256', name: 'future_time', indexed: false }
+        { type: 'uint256', name: 'future_time', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       name: 'StopRampA',
       inputs: [
         { type: 'uint256', name: 'A', indexed: false },
-        { type: 'uint256', name: 't', indexed: false }
+        { type: 'uint256', name: 't', indexed: false },
       ],
       anonymous: false,
-      type: 'event'
+      type: 'event',
     },
     {
       outputs: [],
@@ -122,10 +124,10 @@ export const threePoolJson = {
         { type: 'address', name: '_pool_token' },
         { type: 'uint256', name: '_A' },
         { type: 'uint256', name: '_fee' },
-        { type: 'uint256', name: '_admin_fee' }
+        { type: 'uint256', name: '_admin_fee' },
       ],
       stateMutability: 'nonpayable',
-      type: 'constructor'
+      type: 'constructor',
     },
     {
       name: 'A',
@@ -133,7 +135,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 5227
+      gas: 5227,
     },
     {
       name: 'get_virtual_price',
@@ -141,29 +143,29 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 1133537
+      gas: 1133537,
     },
     {
       name: 'calc_token_amount',
       outputs: [{ type: 'uint256', name: '' }],
       inputs: [
         { type: 'uint256[3]', name: 'amounts' },
-        { type: 'bool', name: 'deposit' }
+        { type: 'bool', name: 'deposit' },
       ],
       stateMutability: 'view',
       type: 'function',
-      gas: 4508776
+      gas: 4508776,
     },
     {
       name: 'add_liquidity',
       outputs: [],
       inputs: [
         { type: 'uint256[3]', name: 'amounts' },
-        { type: 'uint256', name: 'min_mint_amount' }
+        { type: 'uint256', name: 'min_mint_amount' },
       ],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 6954858
+      gas: 6954858,
     },
     {
       name: 'get_dy',
@@ -171,11 +173,11 @@ export const threePoolJson = {
       inputs: [
         { type: 'int128', name: 'i' },
         { type: 'int128', name: 'j' },
-        { type: 'uint256', name: 'dx' }
+        { type: 'uint256', name: 'dx' },
       ],
       stateMutability: 'view',
       type: 'function',
-      gas: 2673791
+      gas: 2673791,
     },
     {
       name: 'get_dy_underlying',
@@ -183,11 +185,11 @@ export const threePoolJson = {
       inputs: [
         { type: 'int128', name: 'i' },
         { type: 'int128', name: 'j' },
-        { type: 'uint256', name: 'dx' }
+        { type: 'uint256', name: 'dx' },
       ],
       stateMutability: 'view',
       type: 'function',
-      gas: 2673474
+      gas: 2673474,
     },
     {
       name: 'exchange',
@@ -196,44 +198,44 @@ export const threePoolJson = {
         { type: 'int128', name: 'i' },
         { type: 'int128', name: 'j' },
         { type: 'uint256', name: 'dx' },
-        { type: 'uint256', name: 'min_dy' }
+        { type: 'uint256', name: 'min_dy' },
       ],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 2818066
+      gas: 2818066,
     },
     {
       name: 'remove_liquidity',
       outputs: [],
       inputs: [
         { type: 'uint256', name: '_amount' },
-        { type: 'uint256[3]', name: 'min_amounts' }
+        { type: 'uint256[3]', name: 'min_amounts' },
       ],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 192846
+      gas: 192846,
     },
     {
       name: 'remove_liquidity_imbalance',
       outputs: [],
       inputs: [
         { type: 'uint256[3]', name: 'amounts' },
-        { type: 'uint256', name: 'max_burn_amount' }
+        { type: 'uint256', name: 'max_burn_amount' },
       ],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 6951851
+      gas: 6951851,
     },
     {
       name: 'calc_withdraw_one_coin',
       outputs: [{ type: 'uint256', name: '' }],
       inputs: [
         { type: 'uint256', name: '_token_amount' },
-        { type: 'int128', name: 'i' }
+        { type: 'int128', name: 'i' },
       ],
       stateMutability: 'view',
       type: 'function',
-      gas: 1102
+      gas: 1102,
     },
     {
       name: 'remove_liquidity_one_coin',
@@ -241,22 +243,22 @@ export const threePoolJson = {
       inputs: [
         { type: 'uint256', name: '_token_amount' },
         { type: 'int128', name: 'i' },
-        { type: 'uint256', name: 'min_amount' }
+        { type: 'uint256', name: 'min_amount' },
       ],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 4025523
+      gas: 4025523,
     },
     {
       name: 'ramp_A',
       outputs: [],
       inputs: [
         { type: 'uint256', name: '_future_A' },
-        { type: 'uint256', name: '_future_time' }
+        { type: 'uint256', name: '_future_time' },
       ],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 151919
+      gas: 151919,
     },
     {
       name: 'stop_ramp_A',
@@ -264,18 +266,18 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 148637
+      gas: 148637,
     },
     {
       name: 'commit_new_fee',
       outputs: [],
       inputs: [
         { type: 'uint256', name: 'new_fee' },
-        { type: 'uint256', name: 'new_admin_fee' }
+        { type: 'uint256', name: 'new_admin_fee' },
       ],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 110461
+      gas: 110461,
     },
     {
       name: 'apply_new_fee',
@@ -283,7 +285,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 97242
+      gas: 97242,
     },
     {
       name: 'revert_new_parameters',
@@ -291,7 +293,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 21895
+      gas: 21895,
     },
     {
       name: 'commit_transfer_ownership',
@@ -299,7 +301,7 @@ export const threePoolJson = {
       inputs: [{ type: 'address', name: '_owner' }],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 74572
+      gas: 74572,
     },
     {
       name: 'apply_transfer_ownership',
@@ -307,7 +309,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 60710
+      gas: 60710,
     },
     {
       name: 'revert_transfer_ownership',
@@ -315,7 +317,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 21985
+      gas: 21985,
     },
     {
       name: 'admin_balances',
@@ -323,7 +325,7 @@ export const threePoolJson = {
       inputs: [{ type: 'uint256', name: 'i' }],
       stateMutability: 'view',
       type: 'function',
-      gas: 3481
+      gas: 3481,
     },
     {
       name: 'withdraw_admin_fees',
@@ -331,7 +333,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 21502
+      gas: 21502,
     },
     {
       name: 'donate_admin_fees',
@@ -339,7 +341,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 111389
+      gas: 111389,
     },
     {
       name: 'kill_me',
@@ -347,7 +349,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 37998
+      gas: 37998,
     },
     {
       name: 'unkill_me',
@@ -355,7 +357,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'nonpayable',
       type: 'function',
-      gas: 22135
+      gas: 22135,
     },
     {
       name: 'coins',
@@ -363,7 +365,7 @@ export const threePoolJson = {
       inputs: [{ type: 'uint256', name: 'arg0' }],
       stateMutability: 'view',
       type: 'function',
-      gas: 2220
+      gas: 2220,
     },
     {
       name: 'balances',
@@ -371,7 +373,7 @@ export const threePoolJson = {
       inputs: [{ type: 'uint256', name: 'arg0' }],
       stateMutability: 'view',
       type: 'function',
-      gas: 2250
+      gas: 2250,
     },
     {
       name: 'fee',
@@ -379,7 +381,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2171
+      gas: 2171,
     },
     {
       name: 'admin_fee',
@@ -387,7 +389,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2201
+      gas: 2201,
     },
     {
       name: 'owner',
@@ -395,7 +397,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2231
+      gas: 2231,
     },
     {
       name: 'initial_A',
@@ -403,7 +405,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2261
+      gas: 2261,
     },
     {
       name: 'future_A',
@@ -411,7 +413,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2291
+      gas: 2291,
     },
     {
       name: 'initial_A_time',
@@ -419,7 +421,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2321
+      gas: 2321,
     },
     {
       name: 'future_A_time',
@@ -427,7 +429,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2351
+      gas: 2351,
     },
     {
       name: 'admin_actions_deadline',
@@ -435,7 +437,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2381
+      gas: 2381,
     },
     {
       name: 'transfer_ownership_deadline',
@@ -443,7 +445,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2411
+      gas: 2411,
     },
     {
       name: 'future_fee',
@@ -451,7 +453,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2441
+      gas: 2441,
     },
     {
       name: 'future_admin_fee',
@@ -459,7 +461,7 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2471
+      gas: 2471,
     },
     {
       name: 'future_owner',
@@ -467,7 +469,16 @@ export const threePoolJson = {
       inputs: [],
       stateMutability: 'view',
       type: 'function',
-      gas: 2501
+      gas: 2501,
+    },
+  ],
+}
+export default {
+  getAddress: (network) => {
+    if (!addresses[network]) {
+      throw new Error('Contract address not found')
     }
-  ]
+    return addresses[network]
+  },
+  abi: threePoolJson.abi,
 }

@@ -1,6 +1,9 @@
-export const mainnetAddress = '0xB72B31907C1C95F3650b64b2469e08EdACeE5e8F'
+const mainnetAddress = '0xB72B31907C1C95F3650b64b2469e08EdACeE5e8F'
+const addresses = {
+  eth: mainnetAddress,
+}
 
-export const bzrxVestingJson = {
+const bzrxVestingJson = {
   abi: [
     {
       anonymous: false,
@@ -9,23 +12,23 @@ export const bzrxVestingJson = {
           indexed: true,
           internalType: 'address',
           name: 'owner',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'spender',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'value',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Approval',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -34,17 +37,17 @@ export const bzrxVestingJson = {
           indexed: true,
           internalType: 'address',
           name: 'owner',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'value',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Claim',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -53,17 +56,17 @@ export const bzrxVestingJson = {
           indexed: true,
           internalType: 'address',
           name: 'previousOwner',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'newOwner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'OwnershipTransferred',
-      type: 'event'
+      type: 'event',
     },
     {
       anonymous: false,
@@ -72,23 +75,23 @@ export const bzrxVestingJson = {
           indexed: true,
           internalType: 'address',
           name: 'from',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: true,
           internalType: 'address',
           name: 'to',
-          type: 'address'
+          type: 'address',
         },
         {
           indexed: false,
           internalType: 'uint256',
           name: 'value',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'Transfer',
-      type: 'event'
+      type: 'event',
     },
     {
       constant: true,
@@ -98,12 +101,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'contract IERC20',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -111,25 +114,25 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_owner',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: '_spender',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'allowance',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -137,25 +140,25 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_spender',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: '_value',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'approve',
       outputs: [
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -163,20 +166,20 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_owner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'balanceOf',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -184,25 +187,25 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_owner',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: '_blockNumber',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'balanceOfAt',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -211,7 +214,7 @@ export const bzrxVestingJson = {
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -220,7 +223,7 @@ export const bzrxVestingJson = {
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -228,20 +231,20 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_owner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'claimedBalanceOf',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -251,12 +254,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -266,12 +269,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint8',
           name: '',
-          type: 'uint8'
-        }
+          type: 'uint8',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -280,7 +283,7 @@ export const bzrxVestingJson = {
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -290,12 +293,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -305,12 +308,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'string',
           name: '',
-          type: 'string'
-        }
+          type: 'string',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -320,12 +323,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -333,19 +336,19 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_receiver',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: '_amount',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'rescue',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -355,12 +358,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'string',
           name: '',
-          type: 'string'
-        }
+          type: 'string',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -370,12 +373,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -385,12 +388,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -398,20 +401,20 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '_blockNumber',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'totalSupplyAt',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -421,12 +424,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -436,12 +439,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -449,25 +452,25 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_to',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: '_value',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'transfer',
       outputs: [
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -475,30 +478,30 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_from',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'address',
           name: '_to',
-          type: 'address'
+          type: 'address',
         },
         {
           internalType: 'uint256',
           name: '_value',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       name: 'transferFrom',
       outputs: [
         {
           internalType: 'bool',
           name: '',
-          type: 'bool'
-        }
+          type: 'bool',
+        },
       ],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: false,
@@ -506,14 +509,14 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: 'newOwner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'transferOwnership',
       outputs: [],
       payable: false,
       stateMutability: 'nonpayable',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -521,20 +524,20 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_owner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'vestedBalanceOf',
       outputs: [
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -542,20 +545,20 @@ export const bzrxVestingJson = {
         {
           internalType: 'address',
           name: '_owner',
-          type: 'address'
-        }
+          type: 'address',
+        },
       ],
       name: 'vestingBalanceOf',
       outputs: [
         {
           internalType: 'uint256',
           name: 'balance',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -565,12 +568,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -580,12 +583,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -595,12 +598,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -610,12 +613,12 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
     },
     {
       constant: true,
@@ -625,12 +628,22 @@ export const bzrxVestingJson = {
         {
           internalType: 'uint256',
           name: '',
-          type: 'uint256'
-        }
+          type: 'uint256',
+        },
       ],
       payable: false,
       stateMutability: 'view',
-      type: 'function'
+      type: 'function',
+    },
+  ],
+}
+
+export default {
+  getAddress: (network) => {
+    if (!addresses[network]) {
+      throw new Error('Contract address not found')
     }
-  ]
+    return addresses[network]
+  },
+  abi: bzrxVestingJson.abi,
 }
