@@ -4,5 +4,7 @@
   "corsHeaders": ["Link"],
   "cache_ttl_sec": 900,
   "cache_params_ttl_day": 1,
-  "web3_provider_url": "https://eth-mainnet.alchemyapi.io/v2/ifuo2lV1cQiJIHHwyvYzZPN8mSyFbqlS"
+  "web3_provider_url": "https://eth-mainnet.alchemyapi.io/v2/ifuo2lV1cQiJIHHwyvYzZPN8mSyFbqlS",
+  "kyber_api_pairs_url": "https://api.kyber.network/api/tokens/pairs",
+  "thegraph_api_url": "https://api.thegraph.com/subgraphs/id/QmdsUpXfMteQ3V5kwoQa5dLme53BeA8PGHqeTHgW3dAWmH"
 }

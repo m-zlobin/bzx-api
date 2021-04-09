@@ -366,6 +366,17 @@
           }
         }
       }
+    },
+    "/staking-apr": {
+      "get": {
+        "tags": ["External Integration"],
+        "summary": "Get staking APR",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   }
 }

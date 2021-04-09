@@ -7,6 +7,7 @@ import { query, validationResult } from 'express-validator'
 import { iTokens } from '../config/iTokens'
 
 import QueuedStorage from '../QueuedStorage'
+import Subgraph from '../subgraph'
 
 export default ({ config, logger }) => {
   const api = Router()
@@ -20,8 +21,10 @@ export default ({ config, logger }) => {
   })()
   const web3 = new Web3(new Web3.providers.HttpProvider(config.web3_provider_url))
 
-  const fulcrum = new Fulcrum(web3, storage, logger)
+  const subgraph = new Subgraph(web3, logger, config)
+  const fulcrum = new Fulcrum(web3, storage, logger, subgraph)
   const torque = new Torque(web3, storage, logger)
+ 
 
   api.get('/interest-rates-fulcrum', async (req, res) => {
     const lendRates = await fulcrum.getFulcrumLendRates()
@@ -192,6 +195,12 @@ export default ({ config, logger }) => {
       }
     }
   )
+
+
+  api.get('/staking-apr', async (req, res) => {
+    const aprs = await fulcrum.getStakingAPRs()
+      res.json(aprs)
+  })
 
   api.get('*', function(req, res) {
     res

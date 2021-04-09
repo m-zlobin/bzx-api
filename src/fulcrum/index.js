@@ -22,16 +22,20 @@ import { mainnetAddress as threePoolAddress, threePoolJson } from '../contracts/
 import config from '../config.json'
 import { pTokenPricesModel, pTokenPriceModel } from '../models/pTokenPrices'
 import { iTokenPricesModel, iTokenPriceModel } from '../models/iTokenPrices'
-import { statsModel, tokenStatsModel, allTokensStatsModel } from '../models/stats'
+import { statsModel, tokenStatsModel, allTokensStatsModel, stakingPoolsInfoModel, stakingPoolInfoModel } from '../models/stats'
 import { loanParamsListModel, loanParamsModel } from '../models/loanParams'
+import Subgraph from '../subgraph'
 
 const UNLIMITED_ALLOWANCE_IN_BASE_UNITS = new BigNumber(2).pow(256).minus(1)
 
 export default class Fulcrum {
-  constructor(web3, storage, logger) {
+  
+  constructor(web3, storage, logger, subgraph) {
     this.web3 = web3
     this.logger = logger
     this.storage = storage
+    this.subgraph = subgraph;
+
     setInterval(this.updateCache.bind(this), config.cache_ttl_sec * 1000)
     setInterval(this.updateParamsCache.bind(this), config.cache_params_ttl_day * 86400 * 1000)
     this.DappHeperContract = new this.web3.eth.Contract(DappHelperJson.abi, dappHelperAddress)
@@ -51,6 +55,10 @@ export default class Fulcrum {
     await this.updatePTokensPrices()
     // await this.storage.setItem("ptoken-prices", ptoken);
     this.logger.info('ptoken-prices updated')
+
+    await this.updateStackingPoolsInfoStats();
+    this.logger.info('staking-pools-info updated')
+    
   }
 
   async updateParamsCache(key, value) {
@@ -231,6 +239,24 @@ export default class Fulcrum {
     })
     return result
   }
+
+  async getStakingAPRs() {
+    let lastReserveData = (
+      await stakingPoolsInfoModel
+        .find()
+        .sort({ _id: -1 })
+        .select({ pools: 1 })
+        .lean()
+        .limit(1)
+    )[0]
+    if (!lastReserveData) {
+      this.logger.info('No staking pool data in db!')
+      lastReserveData = await this.updateStackingPoolsInfoStats()
+    }
+
+    return lastReserveData.pools
+  }
+
 
   async updateITokensPrices() {
     const usdRates = await this.getUsdRates()
@@ -668,6 +694,25 @@ export default class Fulcrum {
     return {
       swapToUSDPrice: dbStatsDocuments[0].tokensStats[0].swapToUSDPrice,
       timestamp: dbStatsDocuments[0].date.getTime()
+    }
+  }
+
+  async updateStackingPoolsInfoStats(){
+    const statingPoolsInfoStats = new stakingPoolsInfoModel();
+    const stakingPoolsInfo = await this.subgraph.getStakingPoolsInfo();
+    if(stakingPoolsInfo){
+        Object.keys(stakingPoolsInfo).forEach(address=>{
+          const pool = stakingPoolsInfo[address];
+          const model = new stakingPoolInfoModel({
+            address: address,
+            volume: pool.volume.toFixed(),
+            apr: pool.apr,
+            priceEth: pool.priceEth,
+            ratio: pool.ratio
+          });  
+          statingPoolsInfoStats.pools.push(model);
+        })
+        statingPoolsInfoStats.save();
     }
   }
 
