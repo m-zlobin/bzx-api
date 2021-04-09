@@ -115,12 +115,12 @@ export default class Subgraph {
     staked[bpt].ratio = staked[bpt].volume * rates[3] / totalStaked;
 
     const bptMarketPrice = await this.getBptMarketPrice(prices[weth].currentPrice, prices[bzrx].currentPrice);
-    const vbzrMarketPrice = await this.getVbzrxMarketPrice(prices) / bzrxDecimals;
+    const vbzrxMarketPrice = await this.getVbzrxMarketPrice(prices) / bzrxDecimals;
 
     staked[bzrx].priceEth = prices[bzrx].lastPrice;
     staked[ibzrx].priceEth = prices[bzrx].lastPrice * rates[1];
-    staked[vbzrx].priceEth = vbzrzMarketPrice;
-    staked[bpt].priceEth = vbzrMarketPrice;
+    staked[vbzrx].priceEth = vbzrxMarketPrice;
+    staked[bpt].priceEth = bptMarketPrice;
 
     //Only half of profit goes to staking rewards
     totalFeesEth = totalFeesEth.toNumber() / 2;
