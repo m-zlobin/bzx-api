@@ -40,17 +40,13 @@ export default ({ config, logger }) => {
       return [{ network: 'eth', single: true }]
     }
 
-    if (!Array.isArray(reqNetworks)) {
-      return [{ network: reqNetworks, single: false }]
-    }
-
     const result = []
-    reqNetworks.forEach(network => {
-      if (!fulcrums[network]) {
+    reqNetworks.split(",").forEach(network => {
+      if (!fulcrums[network.trim()]) {
         logger.error(network + ' network is not supported');
         return;
       }
-      result.push({ network: network, single: false })
+      result.push({ network: network.trim(), single: false })
     })
     return result;
   }
