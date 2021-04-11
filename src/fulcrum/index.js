@@ -538,6 +538,9 @@ export default class Fulcrum {
       )
       .sort({ date: 1 })
       .lean()
+    
+    if(dbStatsDocuments.length == 0) 
+      return []
 
     const arrayLength = dbStatsDocuments.length
     const desiredlength =
@@ -607,6 +610,9 @@ export default class Fulcrum {
       .sort({ date: 1 })
       .lean()
 
+    if(dbStatsDocuments.length == 0) 
+      return []
+      
     return {
       swapToUSDPrice: dbStatsDocuments[0].tokensStats[0].swapToUSDPrice,
       timestamp: dbStatsDocuments[0].date.getTime(),
