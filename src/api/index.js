@@ -16,97 +16,105 @@ export default ({ config, logger }) => {
   )
   const storage = new QueuedStorage()
 
-  ;(async () => {
-    await storage.init({
-      dir: 'persist-storage',
-    })
-  })()
-  const web3 = new Web3(new Web3.providers.HttpProvider(config.web3_provider_url))
-  const web3Bsc = new Web3(new Web3.providers.HttpProvider(config.web3_bsc_provider_url))
+    ; (async () => {
+      await storage.init({
+        dir: 'persist-storage',
+      })
+    })()
 
-  const fulcrum = new Fulcrum(web3, storage, logger, 'eth')
-  const fulcrumBsc = new Fulcrum(web3Bsc, storage, logger, 'bsc')
-
-  const torque = new Torque(web3, storage, logger, 'eth')
-  const torqueBsc = new Torque(web3Bsc, storage, logger, 'bsc')
+  const web3Eth = new Web3(new Web3.providers.HttpProvider(config.web3_provider_url));
+  const web3Bsc = new Web3(new Web3.providers.HttpProvider(config.web3_bsc_provider_url));
+  const fulcrums = {
+    'eth': new Fulcrum(web3Eth, storage, logger, 'eth'),
+    'bsc': new Fulcrum(web3Bsc, storage, logger, 'bsc')
+  }
 
   api.get('/interest-rates-fulcrum', async (req, res) => {
-    const lendRates = await fulcrum.getFulcrumLendRates()
+    const lendRates = await fulcrums.eth.getFulcrumLendRates()
     res.json(lendRates)
   })
 
   api.get('/interest-rates-torque', async (req, res) => {
-    const borrowRates = await fulcrum.getTorqueBorrowRates()
+    const borrowRates = await fulcrums.eth.getTorqueBorrowRates()
     res.json(borrowRates)
   })
 
   api.get('/interest-rates', async (req, res) => {
-    const rates = await fulcrum.getFulcrumLendAndTorqueBorrowAndYieldRates()
+    const rates = await fulcrums.eth.getFulcrumLendAndTorqueBorrowAndYieldRates()
     res.json({ data: rates, success: true })
   })
 
   api.get('/total-asset-supply', async (req, res) => {
-    const totalAssetSupply = await fulcrum.getTotalAssetSupply()
+    const totalAssetSupply = await fulcrums.eth.getTotalAssetSupply()
     res.json({ data: totalAssetSupply, success: true })
   })
 
   api.get('/total-asset-borrow', async (req, res) => {
-    const totalAssetBorrow = await fulcrum.getTotalAssetBorrow()
+    const totalAssetBorrow = await fulcrums.eth.getTotalAssetBorrow()
     res.json({ data: totalAssetBorrow, success: true })
   })
 
   api.get('/supply-rate-apr', async (req, res) => {
-    const apr = await fulcrum.getSupplyRateAPR()
+    const apr = await fulcrums.eth.getSupplyRateAPR()
     res.json({ data: apr, success: true })
   })
 
   api.get('/borrow-rate-apr', async (req, res) => {
-    const apr = await fulcrum.getBorrowRateAPR()
+    const apr = await fulcrums.eth.getBorrowRateAPR()
     res.json({ data: apr, success: true })
   })
 
   api.get('/yield-farimng-apy', async (req, res) => {
-    const apy = await fulcrum.getYieldFarmingAPY()
+    const apy = await fulcrums.eth.getYieldFarmingAPY()
     res.json({ data: apy, success: true })
   })
 
   api.get('/loan-params', async (req, res) => {
-    const params = await fulcrum.getLoanParams()
+    const params = await fulcrums.eth.getLoanParams()
     res.json({ data: params, success: true })
   })
 
   api.get('/torque-borrow-rate-apr', async (req, res) => {
-    const torqueBorrowRates = await fulcrum.getTorqueBorrowRateAPR()
+    const torqueBorrowRates = await fulcrums.eth.getTorqueBorrowRateAPR()
     res.json({ data: torqueBorrowRates, success: true })
   })
 
   api.get('/vault-balance', async (req, res) => {
-    const vaultBalance = await fulcrum.getVaultBalance()
+    const vaultBalance = await fulcrums.eth.getVaultBalance()
     res.json({ data: vaultBalance, success: true })
   })
 
   api.get('/liquidity', async (req, res) => {
-    const liquidity = await fulcrum.getFreeLiquidity()
+    const liquidity = await fulcrums.eth.getFreeLiquidity()
     res.json({ data: liquidity, success: true })
   })
 
   api.get('/vault-balance-usd', async (req, res) => {
-    const tvl = await fulcrum.getTVL()
-    res.json({ data: tvl, success: true })
-  })
+    const reqNetworks = req.query.networks
+    if (!reqNetworks) {
+      const tvlEth = await fulcrums.eth.getTVL()
+      return res.json({ data: tvlEth, success: true })
+    }
 
-  api.get('/bsc/vault-balance-usd', async (req, res) => {
-    const tvl = await fulcrumBsc.getTVL()
-    res.json({ data: tvl, success: true })
+    const output = { data: {}, success: true }
+    for (let i = 0; i < reqNetworks.length; i++) {
+      const network = reqNetworks[i];
+      if (!fulcrums[network]) {
+        logger.error(network + ' network is not supported');
+        return;
+      }
+      output.data[network] = await fulcrums[network].getTVL()
+    }
+    return res.json(output)
   })
 
   api.get('/oracle-rates-usd', async (req, res) => {
-    const usdRates = await fulcrum.getUsdRates()
+    const usdRates = await fulcrums.eth.getUsdRates()
     res.json({ data: usdRates, success: true })
   })
 
   api.get('/itoken-prices', async (req, res) => {
-    const usdRates = await fulcrum.getITokensPrices()
+    const usdRates = await fulcrums.eth.getITokensPrices()
     res.json({ data: usdRates, success: true })
   })
 
@@ -126,8 +134,22 @@ export default ({ config, logger }) => {
       let endDate = new Date(parseInt(req.query.end_date))
       let pointsNumber = parseInt(req.query.points_number)
 
-      const tvlHistory = await fulcrum.getHistoryTVL(startDate, endDate, pointsNumber)
-      res.json({ data: tvlHistory, success: true })
+      const reqNetworks = req.query.networks
+      if (!reqNetworks) {
+        const tvlHistoryEth = await fulcrums.eth.getHistoryTVL(startDate, endDate, pointsNumber)
+        return res.json({ data: tvlHistoryEth, success: true })
+      }
+
+      const output = { data: {}, success: true }
+      for (let i = 0; i < reqNetworks.length; i++) {
+        const network = reqNetworks[i];
+        if (!fulcrums[network]) {
+          logger.error(network + ' network is not supported');
+          return;
+        }
+        output.data[network] = await fulcrums[network].getHistoryTVL(startDate, endDate, pointsNumber)
+      }
+      return res.json(output)
     }
   )
 
@@ -149,8 +171,22 @@ export default ({ config, logger }) => {
       let endDate = new Date(parseInt(req.query.end_date))
       let pointsNumber = parseInt(req.query.points_number)
 
-      const aprHistory = await fulcrum.getAssetStatsHistory(asset, startDate, endDate, pointsNumber)
-      res.json({ data: aprHistory, success: true })
+      const reqNetworks = req.query.networks
+      if (!reqNetworks) {
+        const aprHistory = await fulcrums.eth.getAssetStatsHistory(asset, startDate, endDate, pointsNumber)
+        return res.json({ data: aprHistory, success: true })
+      }
+
+      const output = { data: {}, success: true }
+      for (let i = 0; i < reqNetworks.length; i++) {
+        const network = reqNetworks[i];
+        if (!fulcrums[network]) {
+          logger.error(network + ' network is not supported');
+          return;
+        }
+        output.data[network] = await fulcrums[network].getAssetStatsHistory(asset, startDate, endDate, pointsNumber)
+      }
+      return res.json(output)
     }
   )
 
@@ -168,7 +204,7 @@ export default ({ config, logger }) => {
       let asset = req.query.asset
       let date = new Date(parseInt(req.query.date))
 
-      const priceHistory = await fulcrum.getAssetHistoryPrice(asset, date)
+      const priceHistory = await fulcrums.eth.getAssetHistoryPrice(asset, date)
       res.json({ data: priceHistory, success: true })
     }
   )

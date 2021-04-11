@@ -24,6 +24,10 @@ export default class Fulcrum {
     this.storage = storage
     this.network = network
     this.iTokensByNetwork = iTokens[network]
+    this.networkFilter = [
+        {network: { $exists: this.network !== 'eth'}},
+        {network: this.network}
+    ]
     setInterval(this.updateCache.bind(this), config.cache_ttl_sec * 1000)
     setInterval(this.updateParamsCache.bind(this), config.cache_params_ttl_day * 86400 * 1000)
     this.DappHeperContract = new this.web3.eth.Contract(
@@ -437,10 +441,13 @@ export default class Fulcrum {
 
   async getReserveData() {
     let result = []
-    const statsModelByNetwork = statsModel[this.network]
     const lastReserveData = (
-      await statsModelByNetwork
-        .find()
+      await statsModel
+        .find(
+          {
+            $or: this.networkFilter,
+          }
+        )
         .sort({ _id: -1 })
         .select({ tokensStats: 1, allTokensStats: 1 })
         .lean()
@@ -463,10 +470,10 @@ export default class Fulcrum {
   }
 
   async getHistoryTVL(startDate, endDate, estimatedPointsNumber) {
-    const statsModelByNetwork = statsModel[this.network]
-    const dbStatsDocuments = await statsModelByNetwork
+    const dbStatsDocuments = await statsModel
       .find(
         {
+          $or: this.networkFilter,
           date: {
             $lt: endDate,
             $gte: startDate,
@@ -476,6 +483,10 @@ export default class Fulcrum {
       )
       .sort({ date: 1 })
       .lean()
+    
+    if(dbStatsDocuments.length == 0) 
+      return []
+
     const arrayLength = dbStatsDocuments.length
     const desiredlength =
       dbStatsDocuments.length > estimatedPointsNumber
@@ -513,10 +524,10 @@ export default class Fulcrum {
   }
 
   async getAssetStatsHistory(asset, startDate, endDate, estimatedPointsNumber, metrics) {
-    const statsModelByNetwork = statsModel[this.network]
-    const dbStatsDocuments = await statsModelByNetwork
+    const dbStatsDocuments = await statsModel
       .find(
         {
+          $or: this.networkFilter,
           date: {
             $lt: endDate,
             $gte: startDate,
@@ -581,10 +592,10 @@ export default class Fulcrum {
   }
 
   async getAssetHistoryPrice(asset, date) {
-    const statsModelByNetwork = statsModel[this.network]
-    const dbStatsDocuments = await statsModelByNetwork
+    const dbStatsDocuments = await statsModel
       .find(
         {
+          $or: this.networkFilter,
           date: {
             $lt: new Date(date.getTime() + 1000 * 60 * 60),
             $gte: new Date(date.getTime() - 1000 * 60 * 60),
@@ -700,9 +711,9 @@ export default class Fulcrum {
     const reserveData = await this.DappHeperContract.methods.reserveDetails(tokenAddresses).call()
     let usdTotalLockedAll = new BigNumber(0)
     let usdSupplyAll = new BigNumber(0)
-    const statsModelByNetwork = statsModel[this.network]
-    const stats = new statsModelByNetwork()
+    const stats = new statsModel()
     stats.tokensStats = []
+    stats.network = this.network
     const bzrxUsdPrice = new BigNumber(
       swapRates[this.iTokensByNetwork.map((x) => x.name).indexOf('bzrx')]
     ).dividedBy(10 ** 18)
@@ -827,6 +838,7 @@ export default class Fulcrum {
 
           stats.tokensStats.push(
             new tokenStatsModel({
+              network: this.network,
               token: token.name,
               liquidity: marketLiquidity.dividedBy(10 ** 18).toFixed(),
               totalSupply: totalAssetSupply.dividedBy(10 ** 18).toFixed(),
@@ -878,6 +890,7 @@ export default class Fulcrum {
       })
 
       stats.allTokensStats = new allTokensStatsModel({
+        network: this.network,
         token: 'all',
         usdSupply: usdSupplyAll.dividedBy(10 ** 18).toFixed(),
         usdTotalLocked: usdTotalLockedAll.dividedBy(10 ** 18).toFixed(),

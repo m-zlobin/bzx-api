@@ -1,6 +1,11 @@
 const mongoose = require('mongoose')
 
 const tokenStatsModel = new mongoose.Schema({
+  network: {
+    type: String,
+    required: true,
+  },
+
   token: {
     type: String,
     required: true,
@@ -60,6 +65,10 @@ const tokenStatsModel = new mongoose.Schema({
 })
 
 const allTokensStatsModel = new mongoose.Schema({
+  network: {
+    type: String,
+    required: true,
+  },
   token: {
     type: String,
     required: true,
@@ -75,6 +84,10 @@ const allTokensStatsModel = new mongoose.Schema({
 })
 
 const statsModel = new mongoose.Schema({
+  network: {
+    type: String,
+    required: true,
+  },
   date: {
     type: Date,
     required: true,
@@ -92,8 +105,6 @@ const statsModel = new mongoose.Schema({
   },
 })
 
-const statsModelEth = mongoose.model('stats', statsModel)
-const statsModelBsc = mongoose.model('stats_bsc', statsModel)
-module.exports.statsModel = { eth: statsModelEth, bsc: statsModelBsc }
+module.exports.statsModel =  mongoose.model('stats', statsModel)
 module.exports.tokenStatsModel = mongoose.model('token_stats', tokenStatsModel)
 module.exports.allTokensStatsModel = mongoose.model('all_token_stats', allTokensStatsModel)
