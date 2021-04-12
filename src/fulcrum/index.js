@@ -17,6 +17,7 @@ import Web3Utils from 'web3-utils'
 
 const UNLIMITED_ALLOWANCE_IN_BASE_UNITS = new BigNumber(2).pow(256).minus(1)
 
+
 export default class Fulcrum {
   constructor(web3, storage, logger, network) {
     this.web3 = web3
@@ -24,10 +25,14 @@ export default class Fulcrum {
     this.storage = storage
     this.network = network
     this.iTokensByNetwork = iTokens[network]
-    this.networkFilter = [
-        {network: { $exists: this.network !== 'eth'}},
+    
+    this.networkFilter = {
+      eth: [
+        {network: { $exists: false}},
         {network: this.network}
-    ]
+      ]
+    }[this.network] || [{network: this.network}]
+
     setInterval(this.updateCache.bind(this), config.cache_ttl_sec * 1000)
     setInterval(this.updateParamsCache.bind(this), config.cache_params_ttl_day * 86400 * 1000)
     this.DappHeperContract = new this.web3.eth.Contract(
