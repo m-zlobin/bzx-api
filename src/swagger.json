@@ -39,6 +39,15 @@
       "get": {
         "tags": ["Stats"],
         "summary": "Get supply interest rates (APR)",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -51,6 +60,15 @@
         "tags": ["Stats"],
         "summary": "Get Total Supply (USD)",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -65,6 +83,15 @@
         "tags": ["Stats"],
         "summary": "Get Total Borrow Assets",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -79,6 +106,15 @@
         "tags": ["Stats"],
         "summary": "Get Fulcrum Borrow Interest Rates (APR)",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -93,6 +129,15 @@
         "tags": ["Stats"],
         "summary": "Get Torque Borrow Interest Rates (APR)",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -107,6 +152,15 @@
         "tags": ["Stats"],
         "summary": "Get bZx Vault Balance",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -121,6 +175,15 @@
         "tags": ["Stats"],
         "summary": "Get bZx Free Liquidity",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -135,6 +198,15 @@
         "tags": ["Stats"],
         "summary": "Get bZx TVL in USD",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -149,6 +221,15 @@
         "tags": ["Stats"],
         "summary": "Oracle Assets Prices in USD",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -163,6 +244,15 @@
         "tags": ["Stats"],
         "summary": "Loan Parameters",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -178,6 +268,13 @@
         "summary": "Collateral Estimate",
         "description": "Estimates how much of collateral you have to deposit to borrow AMOUNT of asset",
         "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          },
           {
             "name": "borrow_asset",
             "in": "query",
@@ -214,6 +311,15 @@
         "tags": ["iTokens Prices"],
         "summary": "Get iToken prices",
         "description": "",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "responses": {
@@ -229,6 +335,13 @@
         "summary": "Get tvl history data",
         "description": "",
         "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          },
           {
             "name": "start_date",
             "in": "query",
@@ -266,6 +379,13 @@
         "summary": "Get history data for the asset (tvl, apr, utilization)",
         "description": "",
         "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          },
           {
             "name": "asset",
             "in": "query",
@@ -311,6 +431,13 @@
         "description": "",
         "parameters": [
           {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          },
+          {
             "name": "asset",
             "in": "query",
             "required": "true",
@@ -338,6 +465,15 @@
       "get": {
         "tags": ["External Integration"],
         "summary": "Get Fulcrum interest rates (APR and APY), specifically designed for loanscan",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -349,6 +485,15 @@
       "get": {
         "tags": ["External Integration"],
         "summary": "Get Torque interest rates (APR and APY), specifically designed for loanscan",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -360,6 +505,15 @@
       "get": {
         "tags": ["External Integration"],
         "summary": "Get Fulcrum and Torque interest rates (APR and APY) and Yield",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "false",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success"
