@@ -25,13 +25,13 @@ export default class Fulcrum {
     this.storage = storage
     this.network = network
     this.iTokensByNetwork = iTokens[network]
-    
+
     this.networkFilter = {
       eth: [
-        {network: { $exists: false}},
-        {network: this.network}
+        { network: { $exists: false } },
+        { network: this.network }
       ]
-    }[this.network] || [{network: this.network}]
+    }[this.network] || [{ network: this.network }]
 
     setInterval(this.updateCache.bind(this), config.cache_ttl_sec * 1000)
     setInterval(this.updateParamsCache.bind(this), config.cache_params_ttl_day * 86400 * 1000)
@@ -232,6 +232,24 @@ export default class Fulcrum {
     })
     return result
   }
+
+  async getStakingAPRs() {
+    let lastReserveData = (
+      await stakingPoolsInfoModel
+        .find()
+        .sort({ _id: -1 })
+        .select({ pools: 1 })
+        .lean()
+        .limit(1)
+    )[0]
+    if (!lastReserveData) {
+      this.logger.info('No staking pool data in db!')
+      lastReserveData = await this.updateStackingPoolsInfoStats()
+    }
+
+    return lastReserveData.pools
+  }
+
 
   async updateITokensPrices() {
     const usdRates = await this.getUsdRates()
@@ -488,8 +506,8 @@ export default class Fulcrum {
       )
       .sort({ date: 1 })
       .lean()
-    
-    if(dbStatsDocuments.length == 0) 
+
+    if (dbStatsDocuments.length == 0)
       return []
 
     const arrayLength = dbStatsDocuments.length
@@ -543,8 +561,8 @@ export default class Fulcrum {
       )
       .sort({ date: 1 })
       .lean()
-    
-    if(dbStatsDocuments.length == 0) 
+
+    if (dbStatsDocuments.length == 0)
       return []
 
     const arrayLength = dbStatsDocuments.length
@@ -615,9 +633,9 @@ export default class Fulcrum {
       .sort({ date: 1 })
       .lean()
 
-    if(dbStatsDocuments.length == 0) 
+    if (dbStatsDocuments.length == 0)
       return []
-      
+
     return {
       swapToUSDPrice: dbStatsDocuments[0].tokensStats[0].swapToUSDPrice,
       timestamp: dbStatsDocuments[0].date.getTime(),

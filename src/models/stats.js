@@ -105,6 +105,44 @@ const statsModel = new mongoose.Schema({
   },
 })
 
-module.exports.statsModel =  mongoose.model('stats', statsModel)
+const stakingPoolInfoModel = new mongoose.Schema({
+  address: {
+    type: String,
+    required: true
+  },
+  priceEth: {
+    type: Number,
+    required: true
+  },
+  volume: {
+    type: String,
+    required: true
+  },
+  apr: {
+    type: Number,
+    required: true
+  },
+  ratio: {
+    type: Number,
+    required: true
+  },
+
+})
+
+
+const stakingPoolsInfoModel = new mongoose.Schema({
+  date: {
+    type: Date,
+    default: Date.now,
+    index: true
+  },
+  pools: {
+    type: [stakingPoolInfoModel],
+    required: true,
+    default: []
+  }
+})
+
+module.exports.statsModel = mongoose.model('stats', statsModel)
 module.exports.tokenStatsModel = mongoose.model('token_stats', tokenStatsModel)
 module.exports.allTokensStatsModel = mongoose.model('all_token_stats', allTokensStatsModel)

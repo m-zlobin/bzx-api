@@ -7,6 +7,7 @@ import { query, validationResult } from 'express-validator'
 import { iTokens } from '../config/iTokens'
 
 import QueuedStorage from '../QueuedStorage'
+import Subgraph from '../subgraph'
 
 export default ({ config, logger }) => {
   const api = Router()
