@@ -143,6 +143,7 @@ const stakingPoolsInfoModel = new mongoose.Schema({
   }
 })
 
+
 module.exports.statsModel = mongoose.model('stats', statsModel)
 module.exports.tokenStatsModel = mongoose.model('token_stats', tokenStatsModel)
 module.exports.allTokensStatsModel = mongoose.model('all_token_stats', allTokensStatsModel)
