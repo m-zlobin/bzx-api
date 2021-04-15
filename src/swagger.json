@@ -520,6 +520,26 @@
           }
         }
       }
+    },
+    "/farming-pools-info":{
+      "get": {
+        "tags": ["External Integration"],
+        "summary": "Farming cached data",
+        "parameters": [
+          {
+            "name": "networks",
+            "in": "query",
+            "required": "true",
+            "type": "string",
+            "description": "Requested networks eg. networks=eth,bsc"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
     }
   }
 }
