@@ -29,14 +29,14 @@ const MasterChefPoolInfoModel = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tvl: {
+  usdTotalLocked: {
     type: String,
     required: true,
   },
   apr: {
     type: String,
     required: true,
-  }
+  },
 })
 
 const MasterChefPoolsInfoModel = new mongoose.Schema({
@@ -66,13 +66,20 @@ const MasterChefPoolsInfoModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  bgovAddress: {
+    type: String,
+    required: true,
+  },
+  poolLength: {
+    type: String,
+    required: true,
+  },
   pools: {
     type: [MasterChefPoolInfoModel],
     required: true,
     default: undefined,
   },
 })
-
 
 exports.MasterChefPoolsInfoModel = mongoose.model('masterchef_pools_info', MasterChefPoolsInfoModel)
 exports.MasterChefPoolInfoModel = mongoose.model('masterchef_pool_info', MasterChefPoolInfoModel)

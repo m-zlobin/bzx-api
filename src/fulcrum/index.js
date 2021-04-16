@@ -23,10 +23,8 @@ import { MasterChefPoolInfoModel, MasterChefPoolsInfoModel } from '../models/mas
 
 const UNLIMITED_ALLOWANCE_IN_BASE_UNITS = new BigNumber(2).pow(256).minus(1)
 
-
 export default class Fulcrum {
   constructor(web3, storage, logger, network) {
-
     this.web3 = web3
     this.logger = logger
     this.storage = storage
@@ -36,10 +34,7 @@ export default class Fulcrum {
     this.avgBlockTime = this.network === 'bsc' ? 3 : 15
 
     this.networkFilter = {
-      eth: [
-        { network: { $exists: false } },
-        { network: this.network }
-      ]
+      eth: [{ network: { $exists: false } }, { network: this.network }],
     }[this.network] || [{ network: this.network }]
 
     setInterval(this.updateCache.bind(this), config.cache_ttl_sec * 1000)
@@ -204,19 +199,21 @@ export default class Fulcrum {
 
     //Added LP and bgov volume
     if (this.network === 'bsc') {
-      const bgovAddress = this.erc20TokensByNetwork.bgov.erc20Address.toLowerCase();
-      const bgov_wnbAddress = IPancakePair.getAddress(this.network, 'bgov_wbnb').address.toLowerCase()
-      const masterchefStats = await this.getMasterchefStats();
-      if (!masterchefStats) return tvl;
+      const bgovAddress = this.erc20TokensByNetwork.bgov.erc20Address.toLowerCase()
+      const bgov_wnbAddress = IPancakePair.getAddress(
+        this.network,
+        'bgov_wbnb'
+      ).address.toLowerCase()
+      const masterchefStats = await this.getMasterchefStats()
+      if (!masterchefStats) return tvl
 
-      masterchefStats.pools.forEach(pool => {
+      masterchefStats.pools.forEach((pool) => {
         if (pool.lpToken.toLowerCase() === bgovAddress) {
-          tvl['bgov'] = pool.tvl
-          tvl['all'] += pool.tvl
-        }
-        else if (pool.lpToken.toLowerCase() === bgov_wnbAddress) {
-          tvl['bgov_wbnb'] = pool.tvl
-          tvl['all'] += pool.tvl
+          tvl['bgov'] = pool.usdTotalLocked
+          tvl['all'] += pool.usdTotalLocked
+        } else if (pool.lpToken.toLowerCase() === bgov_wnbAddress) {
+          tvl['bgov_wbnb'] = pool.usdTotalLocked
+          tvl['all'] += pool.usdTotalLocked
         }
       })
     }
@@ -298,7 +295,6 @@ export default class Fulcrum {
       await this.updateLoanParams()
     }
     return lastLoanParams.loanParams.map((params) => {
-      console.log(params)
       return {
         loanId: params.loanId,
         principal: params.principal,
@@ -476,11 +472,9 @@ export default class Fulcrum {
     let result = []
     const lastReserveData = (
       await statsModel
-        .find(
-          {
-            $or: this.networkFilter,
-          }
-        )
+        .find({
+          $or: this.networkFilter,
+        })
         .sort({ _id: -1 })
         .select({ tokensStats: 1, allTokensStats: 1 })
         .lean()
@@ -517,43 +511,41 @@ export default class Fulcrum {
       .sort({ date: 1 })
       .lean()
 
-    if (dbStatsDocuments.length == 0)
-      return []
-    let additionalTvl = {};
+    if (dbStatsDocuments.length == 0) return []
+    let additionalTvl = {}
     //Added LP and bgov volume
     if (this.network === 'bsc') {
-
-      const masterchefStats = await MasterChefPoolsInfoModel
-        .find(
-          {
-            $or: this.networkFilter,
-            date: {
-              $lt: endDate,
-              $gte: startDate,
-            },
+      const masterchefStats = await MasterChefPoolsInfoModel.find(
+        {
+          $or: this.networkFilter,
+          date: {
+            $lt: endDate,
+            $gte: startDate,
           },
-          { date: 1, pools: 1 }
-        )
+        },
+        { date: 1, pools: 1 }
+      )
         .sort({ date: 1 })
         .lean()
 
-      
       if (masterchefStats.length !== 0) {
-        const bgovAddress = this.erc20TokensByNetwork.bgov.erc20Address.toLowerCase();
-        const bgov_wnbAddress = IPancakePair.getAddress(this.network, 'bgov_wbnb').address.toLowerCase()
+        const bgovAddress = this.erc20TokensByNetwork.bgov.erc20Address.toLowerCase()
+        const bgov_wnbAddress = IPancakePair.getAddress(
+          this.network,
+          'bgov_wbnb'
+        ).address.toLowerCase()
         additionalTvl = masterchefStats.reduce((result, stats) => {
           const additioanlTvl = stats.pools.reduce((a, b) => {
             if (b.lpToken.toLowerCase() === bgovAddress) {
-              return a.plus(b.tvl);
+              return a.plus(b.usdTotalLocked)
+            } else if (b.lpToken.toLowerCase() === bgov_wnbAddress) {
+              return a.plus(b.usdTotalLocked)
             }
-            else if (b.lpToken.toLowerCase() === bgov_wnbAddress) {
-              return a.plus(b.tvl);
-            }
-            return a;
-          }, new BigNumber(0));
-          result[stats.date] = additioanlTvl;
-          return result;
-        }, {});
+            return a
+          }, new BigNumber(0))
+          result[stats.date] = additioanlTvl
+          return result
+        }, {})
       }
     }
 
@@ -577,19 +569,22 @@ export default class Fulcrum {
 
     const result = []
     reducedArray.forEach((document, index, documents) => {
-
       let diffWithPrevPrecents = 0
-      if (index > 0){
-        if(additionalTvl[document.date]){
-          document.allTokensStats.usdSupply = new BigNumber(document.allTokensStats.usdSupply).plus(additionalTvl[document.date]);
-          document.allTokensStats.usdTotalLocked = new BigNumber(document.allTokensStats.usdTotalLocked).plus(additionalTvl[document.date]);
+      if (index > 0) {
+        if (additionalTvl[document.date]) {
+          document.allTokensStats.usdSupply = new BigNumber(document.allTokensStats.usdSupply).plus(
+            additionalTvl[document.date]
+          )
+          document.allTokensStats.usdTotalLocked = new BigNumber(
+            document.allTokensStats.usdTotalLocked
+          ).plus(additionalTvl[document.date])
         }
 
         diffWithPrevPrecents =
-        ((document.allTokensStats.usdTotalLocked -
-          documents[index - 1].allTokensStats.usdTotalLocked) /
-          documents[index - 1].allTokensStats.usdTotalLocked) *
-        100
+          ((document.allTokensStats.usdTotalLocked -
+            documents[index - 1].allTokensStats.usdTotalLocked) /
+            documents[index - 1].allTokensStats.usdTotalLocked) *
+          100
       }
       result.push({
         timestamp: new Date(document.date).getTime(),
@@ -599,7 +594,6 @@ export default class Fulcrum {
     })
     return result
   }
-
 
   async getAssetStatsHistory(asset, startDate, endDate, estimatedPointsNumber, metrics) {
     const dbStatsDocuments = await statsModel
@@ -617,8 +611,7 @@ export default class Fulcrum {
       .sort({ date: 1 })
       .lean()
 
-    if (dbStatsDocuments.length == 0)
-      return []
+    if (dbStatsDocuments.length == 0) return []
 
     const arrayLength = dbStatsDocuments.length
     const desiredlength =
@@ -688,8 +681,7 @@ export default class Fulcrum {
       .sort({ date: 1 })
       .lean()
 
-    if (dbStatsDocuments.length == 0)
-      return []
+    if (dbStatsDocuments.length == 0) return []
 
     return {
       swapToUSDPrice: dbStatsDocuments[0].tokensStats[0].swapToUSDPrice,
@@ -796,7 +788,7 @@ export default class Fulcrum {
     let usdTotalLockedAll = new BigNumber(0)
     let usdSupplyAll = new BigNumber(0)
     const stats = new statsModel()
-    stats.date = new Date();
+    stats.date = new Date()
     stats.tokensStats = []
     stats.network = this.network
     const bzrxUsdPrice = new BigNumber(
@@ -984,96 +976,112 @@ export default class Fulcrum {
     }
 
     const pricesByAddress = stats.tokensStats.reduce((result, model) => {
-      result[model.address.toLowerCase()] = model.swapToUSDPrice;
-      return result;
-    }, {});
+      result[model.address.toLowerCase()] = model.swapToUSDPrice
+      return result
+    }, {})
 
-    await this.updateMasterChefStats(stats.date, pricesByAddress);
+    await this.updateMasterChefStats(stats.date, pricesByAddress)
     return result
   }
 
   async updateMasterChefStats(date, pricesByAddress) {
     if (this.network === 'bsc') {
-      const helperContract = new this.web3.eth.Contract(HelperImpl.abi, HelperImpl.getAddress(this.network))
-      const bgovAddress = this.erc20TokensByNetwork.bgov.erc20Address;
-      const pkRouter = new this.web3.eth.Contract(IPancakeRouter02.abi, IPancakeRouter02.getAddress(this.network))
-      const masterchefAddress = Masterchef.getAddress(this.network);
-      const bgov_wbnbAddress = IPancakePair.getAddress(this.network, 'bgov_wbnb').address;
-      const usdtAddress = this.iTokensByNetwork.find(token => token.name === 'usdt').erc20Address;
-      const wbnbAddress = this.iTokensByNetwork.find(token => token.name === 'bnb').erc20Address;
-      const lp = new this.web3.eth.Contract(IPancakePair.abi, bgov_wbnbAddress)
-
-      const lpTotalSuply = await lp.methods.totalSupply().call();
-      const lpReserves = await lp.methods.getReserves().call();
-
-      const [amountOut, bgovPriceEth, bgovPriceUsdt] = await pkRouter.methods.getAmountsOut(
-        new BigNumber(10 ** 18), [bgovAddress, wbnbAddress, usdtAddress]
-      ).call()
-
-      const wbnbPriceUsdt = bgovPriceUsdt / bgovPriceEth
-      const lpUsdtVolume0 = (lpReserves.reserve0 / 10 ** 18) * wbnbPriceUsdt;
-      const lpUsdtVolume1 = (lpReserves.reserve1 / 10 ** 18) * (bgovPriceUsdt / 10 ** 18);
-      const wbnb_bgovPrice = (lpUsdtVolume0 + lpUsdtVolume1) / (lpTotalSuply / 10 ** 18);
+      const currentBlockNumber = await this.web3.eth.getBlock('latest').then((resp) => resp.number)
+      const helperContract = new this.web3.eth.Contract(
+        HelperImpl.abi,
+        HelperImpl.getAddress(this.network)
+      )
+      const masterchefAddress = Masterchef.getAddress(this.network)
       const masterChef = new this.web3.eth.Contract(Masterchef.abi, masterchefAddress)
+      const poolLength = await masterChef.methods.poolLength().call()
       const poolInfos = await masterChef.methods.getPoolInfos().call()
       const totalAllocPoint = await masterChef.methods.totalAllocPoint().call()
-      const bgovPerBlock = new BigNumber(await masterChef.methods.BGOVPerBlock().call()).div(10 ** 18)
+      const bgovPerBlock = new BigNumber(await masterChef.methods.BGOVPerBlock().call()).div(
+        10 ** 18
+      )
+      const bgovAddress = await masterChef.methods.BGOV().call()
+      const pkRouter = new this.web3.eth.Contract(
+        IPancakeRouter02.abi,
+        IPancakeRouter02.getAddress(this.network)
+      )
+      const bgov_wbnbAddress = IPancakePair.getAddress(this.network, 'bgov_wbnb').address
+      const usdtAddress = this.iTokensByNetwork.find((token) => token.name === 'usdt').erc20Address
+      const wbnbAddress = this.iTokensByNetwork.find((token) => token.name === 'bnb').erc20Address
+      const lp = new this.web3.eth.Contract(IPancakePair.abi, bgov_wbnbAddress)
+
+      const lpTotalSuply = await lp.methods.totalSupply().call()
+      const lpReserves = await lp.methods.getReserves().call()
+
+      const [
+        amountOut,
+        bgovPriceEth,
+        bgovPriceUsdt,
+      ] = await pkRouter.methods
+        .getAmountsOut(new BigNumber(10 ** 18), [bgovAddress, wbnbAddress, usdtAddress])
+        .call()
+
+      const wbnbPriceUsdt = bgovPriceUsdt / bgovPriceEth
+      const lpUsdtVolume0 = (lpReserves.reserve0 / 10 ** 18) * wbnbPriceUsdt
+      const lpUsdtVolume1 = (lpReserves.reserve1 / 10 ** 18) * (bgovPriceUsdt / 10 ** 18)
+      const wbnb_bgovPrice = (lpUsdtVolume0 + lpUsdtVolume1) / (lpTotalSuply / 10 ** 18)
+
       const blocksPerYear = (60 * 60 * 24 * 365) / this.avgBlockTime
-      const poolAddresses = poolInfos.map(pool => pool.lpToken.toLowerCase());
+      const poolAddresses = poolInfos.map((pool) => pool.lpToken.toLowerCase())
       const totalStakedBalances = await helperContract.methods
         .balanceOf(poolAddresses, masterchefAddress)
         .call()
 
-      const poolsInfoModel = new MasterChefPoolsInfoModel();
-      poolsInfoModel.date = date;
-      poolsInfoModel.pools = [];
-      poolsInfoModel.network = this.network;
+      const poolsInfoModel = new MasterChefPoolsInfoModel()
+      poolsInfoModel.date = date
+      poolsInfoModel.pools = []
+      poolsInfoModel.network = this.network
       poolsInfoModel.totalAllocPoint = totalAllocPoint
       poolsInfoModel.bgovPerBlock = bgovPerBlock
       poolsInfoModel.blocksPerYear = blocksPerYear
+      poolsInfoModel.bgovAddress = bgovAddress
+      poolsInfoModel.poolLength = poolLength
       poolsInfoModel.bgovPrice = new BigNumber(bgovPriceUsdt).div(10 ** 18)
 
-
       for (let i = 0; i < poolInfos.length; i++) {
-        const poolInfo = poolInfos[i];
+        const poolInfo = poolInfos[i]
 
         const bgovForPoolPerYear = new BigNumber(poolInfo.allocPoint)
           .div(totalAllocPoint)
           .times(bgovPerBlock)
           .times(blocksPerYear)
-          .times(10)
+          .times(currentBlockNumber < 6774870 ? 10 : 1)
 
-        let lpPrice = pricesByAddress[poolInfo.lpToken.toLowerCase()];
+        let lpPrice = pricesByAddress[poolInfo.lpToken.toLowerCase()]
         if (!lpPrice) {
           if (poolInfo.lpToken.toLowerCase() === bgovAddress.toLowerCase()) {
             lpPrice = poolsInfoModel.bgovPrice
-          }
-          else if (poolInfo.lpToken.toLowerCase() === bgov_wbnbAddress.toLowerCase()) {
+          } else if (poolInfo.lpToken.toLowerCase() === bgov_wbnbAddress.toLowerCase()) {
             lpPrice = wbnb_bgovPrice
           }
         }
 
-        const totalStakedUsd = new BigNumber(totalStakedBalances[i]).times(lpPrice).div(10 ** 18);
-        const apr = bgovForPoolPerYear.times(poolsInfoModel.bgovPrice).div(totalStakedUsd).times(100)
+        const totalStakedUsd = new BigNumber(totalStakedBalances[i]).times(lpPrice).div(10 ** 18)
+        const apr = bgovForPoolPerYear
+          .times(poolsInfoModel.bgovPrice)
+          .div(totalStakedUsd)
+          .times(100)
 
-        const poolInfoModel = new MasterChefPoolInfoModel();
-        poolInfoModel.network = this.network;
-        poolInfoModel.lpToken = poolInfo.lpToken;
+        const poolInfoModel = new MasterChefPoolInfoModel()
+        poolInfoModel.network = this.network
+        poolInfoModel.lpToken = poolInfo.lpToken
         poolInfoModel.allocPoint = poolInfo.allocPoint
         poolInfoModel.lastRewardBlock = poolInfo.lastRewardBlock
         poolInfoModel.accBGOVPerShare = poolInfo.accBGOVPerShare
         poolInfoModel.tokenPriceUSD = lpPrice
-        poolInfoModel.tvl = totalStakedUsd;
-        poolInfoModel.apr = apr;
+        poolInfoModel.usdTotalLocked = totalStakedUsd
+        poolInfoModel.apr = apr
         poolInfoModel.stakedVolume = new BigNumber(totalStakedBalances[i]).div(10 ** 18)
 
-        poolsInfoModel.pools.push(poolInfoModel);
+        poolsInfoModel.pools.push(poolInfoModel)
       }
-      await poolsInfoModel.save();
+      await poolsInfoModel.save()
     }
   }
-
-
 
   async getAssetTokenBalanceOfUser(asset, account) {
     let result = new BigNumber(0)
@@ -1111,7 +1119,6 @@ export default class Fulcrum {
 
   async getSwapToUsdRateBatch(usdToken) {
     let result = []
-    console.log({ usdToken })
     const usdTokenAddress = usdToken.erc20Address
     const underlyings = this.iTokensByNetwork.map((e) => e.erc20Address)
     const amounts = this.iTokensByNetwork.map((e) =>
@@ -1126,17 +1133,12 @@ export default class Fulcrum {
   }
 
   async getMasterchefStats() {
-    const result = (
-      await MasterChefPoolsInfoModel
-        .find(
-          {
-            $or: this.networkFilter,
-          }
-        )
-        .sort({ _id: -1 })
-        .lean()
-        .limit(1)
-    )
+    const result = await MasterChefPoolsInfoModel.find({
+      $or: this.networkFilter,
+    })
+      .sort({ _id: -1 })
+      .lean()
+      .limit(1)
 
     if (!result) {
       return {}
