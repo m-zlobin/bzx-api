@@ -5,6 +5,10 @@ const MasterChefPoolInfoModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  id: {
+    type: String,
+    required: true,
+  },
   lpToken: {
     type: String,
     required: true,
@@ -25,7 +29,7 @@ const MasterChefPoolInfoModel = new mongoose.Schema({
     type: String,
     required: true,
   },
-  stakedVolume: {
+  totalStaked: {
     type: String,
     required: true,
   },

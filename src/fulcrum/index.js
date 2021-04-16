@@ -1086,6 +1086,7 @@ export default class Fulcrum {
           .times(100)
 
         const poolInfoModel = new MasterChefPoolInfoModel()
+        poolInfoModel.id = i
         poolInfoModel.network = this.network
         poolInfoModel.lpToken = poolInfo.lpToken
         poolInfoModel.allocPoint = poolInfo.allocPoint
@@ -1094,7 +1095,7 @@ export default class Fulcrum {
         poolInfoModel.tokenPriceUSD = lpPrice
         poolInfoModel.usdTotalLocked = totalStakedUsd
         poolInfoModel.apr = apr
-        poolInfoModel.stakedVolume = new BigNumber(totalStakedBalances[i]).div(10 ** 18)
+        poolInfoModel.totalStaked = new BigNumber(totalStakedBalances[i]).div(10 ** 18)
 
         poolsInfoModel.pools.push(poolInfoModel)
       }

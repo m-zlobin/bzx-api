@@ -409,7 +409,16 @@ export default ({ config, logger }) => {
     }
   )
 
-  api.get('/farming-pools-info', async (req, res) => {
+  api.get('/farming-pools-info', 
+  [
+    query('networks').exists()
+  ],
+  async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array(), success: false })
+    }
+
     const reqNetworks = getNetworks(req)
     const output = { data: {}, success: true }
 
