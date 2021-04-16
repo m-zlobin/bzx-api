@@ -210,10 +210,10 @@ export default class Fulcrum {
       masterchefStats.pools.forEach((pool) => {
         if (pool.lpToken.toLowerCase() === bgovAddress) {
           tvl['bgov'] = pool.usdTotalLocked
-          tvl['all'] += pool.usdTotalLocked
+          tvl['all'] = new BigNumber(tvl['all']).plus(new BigNumber(pool.usdTotalLocked)).toFixed()
         } else if (pool.lpToken.toLowerCase() === bgov_wnbAddress) {
           tvl['bgov_wbnb'] = pool.usdTotalLocked
-          tvl['all'] += pool.usdTotalLocked
+          tvl['all'] = new BigNumber(tvl['all']).plus(new BigNumber(pool.usdTotalLocked)).toFixed()
         }
       })
     }
@@ -536,10 +536,11 @@ export default class Fulcrum {
         ).address.toLowerCase()
         additionalTvl = masterchefStats.reduce((result, stats) => {
           const additioanlTvl = stats.pools.reduce((a, b) => {
-            if (b.lpToken.toLowerCase() === bgovAddress) {
-              return a.plus(b.usdTotalLocked)
-            } else if (b.lpToken.toLowerCase() === bgov_wnbAddress) {
-              return a.plus(b.usdTotalLocked)
+            if (
+              b.lpToken.toLowerCase() === bgovAddress ||
+              b.lpToken.toLowerCase() === bgov_wnbAddress
+            ) {
+              return a.plus(new BigNumber(b.usdTotalLocked))
             }
             return a
           }, new BigNumber(0))
