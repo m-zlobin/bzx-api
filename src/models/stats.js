@@ -10,6 +10,10 @@ const tokenStatsModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  address: {
+    type: String,
+    required: true,
+  },
   liquidity: {
     type: String,
     required: true,

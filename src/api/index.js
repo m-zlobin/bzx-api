@@ -409,6 +409,22 @@ export default ({ config, logger }) => {
     }
   )
 
+  api.get('/farming-pools-info', async (req, res) => {
+    const reqNetworks = getNetworks(req)
+    const output = { data: {}, success: true }
+
+    for (let i = 0; i < reqNetworks.length; i++) {
+      const network = reqNetworks[i].network;
+      if (reqNetworks[i].single) {
+        output.data = await fulcrums[network].getMasterchefStats()
+        return res.json(output)
+      }
+      output.data[network] = await fulcrums[network].getMasterchefStats()
+    }
+    return res.json(output)
+  }
+  )
+
   api.get('*', function (req, res) {
     res
       .status(404)
