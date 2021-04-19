@@ -8,6 +8,9 @@ import { iTokens } from '../config/iTokens'
 
 import QueuedStorage from '../QueuedStorage'
 import Subgraph from '../subgraph'
+import Masterchef from '../contracts/Masterchef'
+import BigNumber from 'bignumber.js'
+import fetch from 'node-fetch'
 
 export default ({ config, logger }) => {
   const api = Router()
@@ -433,6 +436,47 @@ export default ({ config, logger }) => {
     return res.json(output)
   }
   )
+
+  api.get('/bsc/defistation-update-farm-tvl', async (req, res) => {
+    //https://github.com/cosmostation/defistation-web/blob/master/data-provider-api.md
+
+    if(!req.headers.authorization){
+      return { message: 'Authorization header missing', success: false }
+    }
+
+    console.log(req.headers.authorization);
+    const network = 'bsc';
+    const masterChef = await fulcrums[network].getMasterchefStats()
+    const itokens = iTokens[network].map(token=>token.displayName)
+    itokens.push('BGOV')
+    itokens.push('BGOV_WBNB')
+    const totalStaked = masterChef.pools.reduce((result, pool) => {
+      result = result.plus(new BigNumber(pool.usdTotalLocked))
+    return result
+    }, new BigNumber(0))
+
+    const defistationRequest = {
+      "tvl": totalStaked.toFixed(),
+      "volume": 0,
+      "bnb": 0,
+      "data": {
+          "NiceFarm": {
+              "contractAddress": Masterchef.getAddress(network),
+              "tokens": itokens
+          }
+      },
+      "test": req.query.test||false
+  }
+    console.log(defistationRequest);
+    const result = await fetch(config.defistation_api_url+'/tvl', {
+      method: 'POST',
+      body: JSON.stringify(defistationRequest),
+      headers: { 'Authorization': req.headers.authorization }
+  })
+    console.log(result);
+    return res.json(result)
+  })
+
 
   api.get('*', function (req, res) {
     res
