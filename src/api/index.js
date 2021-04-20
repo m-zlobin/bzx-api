@@ -352,6 +352,9 @@ export default ({ config, logger }) => {
       if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array(), success: false })
       }
+      const reqNetworks = getNetworks(req)
+      const output = { data: {}, success: true }
+
       let asset = req.query.asset
       let date = new Date(parseInt(req.query.date))
       for (let i = 0; i < reqNetworks.length; i++) {
