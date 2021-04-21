@@ -446,14 +446,21 @@ export default ({ config, logger }) => {
 
     console.log(req.headers.authorization);
     const network = 'bsc';
-    const masterChef = await fulcrums[network].getMasterchefStats()
+    let totalStaked;
+    try{
+      const masterChef = await fulcrums[network].getMasterchefStats()
+      totalStaked = masterChef.pools.reduce((result, pool) => {
+        result = result.plus(new BigNumber(pool.usdTotalLocked))
+      return result
+      }, new BigNumber(0))  
+    }
+    catch(er){
+      return res.status(422).json({ error: "Cannot get tvl from blockchain", success: false })
+    }
+
     const itokens = iTokens[network].map(token=>token.displayName)
     itokens.push('BGOV')
     itokens.push('BGOV_WBNB')
-    const totalStaked = masterChef.pools.reduce((result, pool) => {
-      result = result.plus(new BigNumber(pool.usdTotalLocked))
-    return result
-    }, new BigNumber(0))
 
     const defistationRequest = {
       "tvl": totalStaked.toFixed(),
@@ -467,14 +474,17 @@ export default ({ config, logger }) => {
       },
       "test": req.query.test||false
   }
-    console.log(defistationRequest);
-    const result = await fetch(config.defistation_api_url+'/tvl', {
+
+    const headers = new fetch.Headers();
+    headers.set('Authorization', req.headers.authorization);
+    headers.set('Content-Type', 'application/json');
+
+    const result = await fetch(config.defistation_api_url+"/tvl", {
       method: 'POST',
       body: JSON.stringify(defistationRequest),
-      headers: { 'Authorization': req.headers.authorization }
+      headers: headers
   })
-    console.log(result);
-    return res.json(result)
+    return res.status(result.status).json(result.json())
   })
 
 
