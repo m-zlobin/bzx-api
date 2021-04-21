@@ -444,7 +444,6 @@ export default ({ config, logger }) => {
       return { message: 'Authorization header missing', success: false }
     }
 
-    console.log(req.headers.authorization);
     const network = 'bsc';
     let totalStaked;
     try{
@@ -484,7 +483,8 @@ export default ({ config, logger }) => {
       body: JSON.stringify(defistationRequest),
       headers: headers
   })
-    return res.status(result.status).json(result.json())
+
+    return res.status(result.status).json({ message: result.statusText, status: result.status, success: result.status===200 })
   })
 
 
