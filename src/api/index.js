@@ -465,7 +465,7 @@ export default ({ config, logger }) => {
     itokens.push('BGOV_WBNB')
 
     const defistationRequest = {
-      "tvl": totalStaked.toFixed(),
+      "tvl": totalStaked.toNumber(),
       "volume": 0,
       "bnb": 0,
       "data": {
