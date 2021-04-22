@@ -8,6 +8,9 @@ import { iTokens } from '../config/iTokens'
 
 import QueuedStorage from '../QueuedStorage'
 import Subgraph from '../subgraph'
+import Masterchef from '../contracts/Masterchef'
+import BigNumber from 'bignumber.js'
+import fetch from 'node-fetch'
 
 export default ({ config, logger }) => {
   const api = Router()
@@ -436,6 +439,57 @@ export default ({ config, logger }) => {
     return res.json(output)
   }
   )
+
+  api.get('/bsc/defistation-update-farm-tvl', async (req, res) => {
+    //https://github.com/cosmostation/defistation-web/blob/master/data-provider-api.md
+
+    if(!req.headers.authorization){
+      return { message: 'Authorization header missing', success: false }
+    }
+
+    const network = 'bsc';
+    let totalStaked;
+    try{
+      const masterChef = await fulcrums[network].getMasterchefStats()
+      totalStaked = masterChef.pools.reduce((result, pool) => {
+        result = result.plus(new BigNumber(pool.usdTotalLocked))
+      return result
+      }, new BigNumber(0))  
+    }
+    catch(er){
+      return res.status(422).json({ error: "Cannot get tvl from blockchain", success: false })
+    }
+
+    const itokens = iTokens[network].map(token=>token.displayName)
+    itokens.push('BGOV')
+    itokens.push('BGOV_WBNB')
+
+    const defistationRequest = {
+      "tvl": totalStaked.toFixed(),
+      "volume": 0,
+      "bnb": 0,
+      "data": {
+          "NiceFarm": {
+              "contractAddress": Masterchef.getAddress(network),
+              "tokens": itokens
+          }
+      },
+      "test": req.query.test||false
+  }
+
+    const headers = new fetch.Headers();
+    headers.set('Authorization', req.headers.authorization);
+    headers.set('Content-Type', 'application/json');
+
+    const result = await fetch(config.defistation_api_url+"/tvl", {
+      method: 'POST',
+      body: JSON.stringify(defistationRequest),
+      headers: headers
+  })
+
+    return res.status(result.status).json({ message: result.statusText, status: result.status, success: result.status===200 })
+  })
+
 
   api.get('*', function (req, res) {
     res
