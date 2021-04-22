@@ -1014,6 +1014,7 @@ export default class Fulcrum {
       const masterChef = new this.web3.eth.Contract(Masterchef.abi, masterchefAddress)
       const poolLength = await masterChef.methods.poolLength().call()
       const poolInfos = await masterChef.methods.getPoolInfos().call()
+      const rewardsMultiplier = await masterChef.methods.getMultiplierNow().call()
       const totalAllocPoint = await masterChef.methods.totalAllocPoint().call()
       const bgovPerBlock = new BigNumber(await masterChef.methods.BGOVPerBlock().call()).div(
         10 ** 18
@@ -1068,7 +1069,9 @@ export default class Fulcrum {
           .div(totalAllocPoint)
           .times(bgovPerBlock)
           .times(blocksPerYear)
-          .times(currentBlockNumber < 6774870 ? 10 : 1)
+          .times(rewardsMultiplier)
+          .div(10**18)
+          
 
         let lpPrice = pricesByAddress[poolInfo.lpToken.toLowerCase()]
         if (!lpPrice) {
