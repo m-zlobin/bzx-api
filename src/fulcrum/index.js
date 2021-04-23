@@ -491,7 +491,7 @@ export default class Fulcrum {
     const lastReserveData = (
       await statsModel
         .find({
-            $or: this.networkFilter,
+          $or: this.networkFilter,
         })
         .sort({ _id: -1 })
         .select({ tokensStats: 1, allTokensStats: 1 })
@@ -996,7 +996,7 @@ export default class Fulcrum {
 
     const pricesByAddress = stats.tokensStats.reduce((result, model) => {
       result[model.address.toLowerCase()] = model.swapToUSDPrice
-    return result
+      return result
     }, {})
 
     await this.updateMasterChefStats(stats.date, pricesByAddress)
@@ -1070,8 +1070,8 @@ export default class Fulcrum {
           .times(bgovPerBlock)
           .times(blocksPerYear)
           .times(rewardsMultiplier)
-          .div(10**18)
-          
+          .div(10 ** 18)
+
 
         let lpPrice = pricesByAddress[poolInfo.lpToken.toLowerCase()]
         if (!lpPrice) {
@@ -1166,6 +1166,33 @@ export default class Fulcrum {
     if (!result) {
       return {}
     }
+
+    const lendRates = await this.getFulcrumLendRates();
+ 
+    if (lendRates) {
+      const lendRatesByName = lendRates.lendRates.reduce((result, rate) => {
+        const name = rate.tokenSymbol.toLowerCase();
+        result[name] = rate;
+        return result;
+      }, {})
+
+      const itokensByAddress = this.iTokensByNetwork.reduce((result, itoken) => {
+        const address = itoken.address.toLowerCase();
+        result[address] = itoken;
+        return result;
+      }, {});
+      result[0].pools.forEach(pool => {
+        const itoken = itokensByAddress[pool.lpToken.toLowerCase()];
+        pool.aprLending = '0';
+        pool.aprCombined = pool.apr;
+        if (itoken) {
+          const lendApr = new Number(lendRatesByName[itoken.name.toLowerCase()].apr);
+          pool.aprLending = lendApr.toString();
+          pool.aprCombined = (lendApr + new Number(pool.apr)).toString();
+        }
+      })
+    }
+
     return result[0]
   }
 }
