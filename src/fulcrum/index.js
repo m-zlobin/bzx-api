@@ -260,12 +260,7 @@ export default class Fulcrum {
 
   async getStakingAPRs() {
     let lastReserveData = (
-      await stakingPoolsInfoModel
-        .find()
-        .sort({ _id: -1 })
-        .select({ pools: 1 })
-        .lean()
-        .limit(1)
+      await stakingPoolsInfoModel.find().sort({ _id: -1 }).select({ pools: 1 }).lean().limit(1)
     )[0]
     if (!lastReserveData) {
       this.logger.info('No staking pool data in db!')
@@ -274,7 +269,6 @@ export default class Fulcrum {
 
     return lastReserveData.pools
   }
-
 
   async updateITokensPrices() {
     const usdRates = await this.getUsdRates()
@@ -1070,8 +1064,6 @@ export default class Fulcrum {
           .times(bgovPerBlock)
           .times(blocksPerYear)
           .times(rewardsMultiplier)
-          .div(10 ** 18)
-
 
         let lpPrice = pricesByAddress[poolInfo.lpToken.toLowerCase()]
         if (!lpPrice) {
@@ -1167,28 +1159,28 @@ export default class Fulcrum {
       return {}
     }
 
-    const lendRates = await this.getFulcrumLendRates();
- 
+    const lendRates = await this.getFulcrumLendRates()
+
     if (lendRates) {
       const lendRatesByName = lendRates.lendRates.reduce((result, rate) => {
-        const name = rate.tokenSymbol.toLowerCase();
-        result[name] = rate;
-        return result;
+        const name = rate.tokenSymbol.toLowerCase()
+        result[name] = rate
+        return result
       }, {})
 
       const itokensByAddress = this.iTokensByNetwork.reduce((result, itoken) => {
-        const address = itoken.address.toLowerCase();
-        result[address] = itoken;
-        return result;
-      }, {});
-      result[0].pools.forEach(pool => {
-        const itoken = itokensByAddress[pool.lpToken.toLowerCase()];
-        pool.aprLending = '0';
-        pool.aprCombined = pool.apr;
+        const address = itoken.address.toLowerCase()
+        result[address] = itoken
+        return result
+      }, {})
+      result[0].pools.forEach((pool) => {
+        const itoken = itokensByAddress[pool.lpToken.toLowerCase()]
+        pool.aprLending = '0'
+        pool.aprCombined = pool.apr
         if (itoken) {
-          const lendApr = new Number(lendRatesByName[itoken.name.toLowerCase()].apr);
-          pool.aprLending = lendApr.toString();
-          pool.aprCombined = (lendApr + new Number(pool.apr)).toString();
+          const lendApr = new Number(lendRatesByName[itoken.name.toLowerCase()].apr)
+          pool.aprLending = lendApr.toString()
+          pool.aprCombined = (lendApr + new Number(pool.apr)).toString()
         }
       })
     }
